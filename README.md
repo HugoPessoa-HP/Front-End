@@ -24,3 +24,6 @@ $ expo install @react-navigation/native-stack
 -- Async Storage
 // Salvando dados dos pesquisadores de forma offline 
 $ expo install @react-native-async-storage/async-storage
+
+-- Axios para requisição ao servidor
+$ expo install axios
