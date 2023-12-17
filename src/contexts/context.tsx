@@ -3,55 +3,56 @@ import { api } from '../services/API'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 type AuthContextData = {
-    user: User;
+    pesquisador: PesquisadorProps;
     isAuthenticated: boolean;
-    loginI: (credencial: LoginU) => Promise<void>;
-    load: boolean;
-    loading: boolean; 
-    logout: () => Promise<void>;  
-}
-
-type User = {
-    id: string;
-    name: string;
-    email: string;
-    token: string;
+    loginI: (credencial: LoginProps) => Promise<void>;
+    loadingAuth: boolean;
+    loading: boolean;
+    logout: () => Promise<void>;
 }
 
 type AuthProviderProps = {
     children: ReactNode;
 }
 
-type LoginU = { 
+type LoginProps = { 
     email: string;
-    senha: string;
+    password: string;
+}
+
+type PesquisadorProps = {
+    nome: string;
+    email: string;
+    cpf: string;
+    token: string;
 }
 
 export const AuthContext = createContext({} as AuthContextData);
 
 export function Context({children}: AuthProviderProps){
-    const [user, setUser] = useState<User>({
-        id: '',
-        name: '',
+    const [pesquisador, setPesquisador] = useState<PesquisadorProps>({
+        nome: '',
         email: '',
-        token: ''
+        cpf: '',
+        token: '',
     });
 
-    const isAuthenticated = !!user.id;
-    const [load, setLoad] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const isAuthenticated = !!pesquisador.nome;
 
+    const [loadingAuth, setLoadingAuth] = useState(false);
+    const [loading, setLoading] = useState(false);
+/*
     useEffect(() => {
 
-        async function getUser(){
+    async function getPesquisador(){  
 
-            const user = await AsyncStorage.getItem('pesquisador');
-            let hasUser: User = JSON.parse(user || '{}')
+            const pesquisador = await AsyncStorage.getItem('pesquisador');
+            let hasUser: Pesquisador = JSON.parse(pesquisador || '{}')
 
             if(Object.keys(hasUser).length > 0){
                 api.defaults.headers.common['Authorization'] = `Beader ${hasUser.token}`
 
-                setUser({
+                setPesquisador({
                     id: hasUser.id,
                     name: hasUser.name,
                     email:hasUser.email,
@@ -63,50 +64,51 @@ export function Context({children}: AuthProviderProps){
         
         }
 
-        getUser();
+        getPesquisador();
 
     }, [])
-    
-    async function loginI({email, senha}: LoginU){
-        setLoad(true);
+*/
+    async function loginI({email, password}: LoginProps){
+        setLoadingAuth(true);
 
         try{
-            const response = api.post('rota', {
+            const response = await api.post('/login', {
                 email,
-                senha
+                password
             })
 
-            const [id, name, token] = (await response).data 
+          const { nome, cpf, token } = response.data;
 
             const data = {
                 ...(await response).data
             };
 
+
             await AsyncStorage.setItem('@pesquisador', JSON.stringify(data))
 
             api.defaults.headers.common['Authorization'] = `Beader ${token}`
 
-            setUser({
-                id,
-                name,
+            setPesquisador({
+                nome,
                 email,
+                cpf,
                 token,
             })
 
-            setLoad(false);
+            setLoadingAuth(false);
 
         }catch(err){
             console.log(" Erro ao realizar Login ")
-            setLoad(false);
+            setLoadingAuth(false);
         }
     }
 
     async function logout(){
         await AsyncStorage.clear()
         .then( () => {
-            setUser({
-                id: '',
-                name: '',
+            setPesquisador({
+                nome: '',
+                cpf: '',
                 email: '',
                 token: '',
             })
@@ -114,7 +116,7 @@ export function Context({children}: AuthProviderProps){
     }
 
     return(
-        <AuthContext.Provider value={{ user, isAuthenticated, loginI, load, loading, logout }}>
+        <AuthContext.Provider value={{ pesquisador, isAuthenticated, loginI, loadingAuth, loading, logout}}>
             {children}
 
         </AuthContext.Provider>

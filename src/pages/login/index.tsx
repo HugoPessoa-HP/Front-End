@@ -1,55 +1,55 @@
 import React, { useState, useContext } from 'react'
 import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity,
-ActivityIndicator, 
-Button} from 'react-native'
+ActivityIndicator, Button} from 'react-native'
 
 import { AuthContext } from '../../contexts/context';
 
-export default function SignIn(){
+export default function Login(){
 
     const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
+    const [password, setPassword] = useState('');
 
     const { loginI, loading } = useContext(AuthContext);
 
     async function login(){
-        if(email === '' || senha === ''){
+        if(email === '' || password === ''){
             return;
         }
+        console.log(email);
+        await loginI({email, password})
         
-        await loginI({email, senha})
     }
 
     return(
         <View style={styles.container}>
             <Image
                 style={styles.logo}
-                source={require('../../assets/logo.png')}
+                source={require('../../images/Plantas-Invasoras(2).png')}
             />
 
             <View style={styles.inputContainer}>
                 <TextInput
                 placeholder='Digite seu Email'
                 style={styles.input}
-                placeholderTextColor="#f0f0f0"
+                placeholderTextColor="#050505"
                 value={email}
                 onChangeText={setEmail}
                 />
                 <TextInput
                 placeholder='Sua senha'
                 style={styles.input}
-                placeholderTextColor="#f0f0f0"
-                value={senha}
-                onChangeText={setSenha}
+                placeholderTextColor="#050505"
+                value={password}
+                onChangeText={setPassword}
                 />
 
                 <TouchableOpacity style={styles.button} onPress={login}>
                     { loading ? (
-                        <ActivityIndicator size={30} color="#fff"/>
+                        <ActivityIndicator size={40} color="#fff"/>
                     ) : (
                         <Text style={styles.buttonText}> Acessar </Text>
                     )}
-                    <Text style={styles.buttonText}> Logar </Text>
+                    
                 </TouchableOpacity>
             </View>
 
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#1d1d2e'
+        backgroundColor: '#13a137'
     },
     logo:{
         marginBottom: 18
@@ -77,16 +77,16 @@ const styles = StyleSheet.create({
     input:{
         width: '95%',
         height: 40,
-        backgroundColor: '#101026',
+        backgroundColor: '#f0f0f0',
         marginBottom: 12,
         borderRadius: 4,
         paddingHorizontal: 8,
-        color: '#fff'
+        color: '#050505'
     },
     button:{
         width: '95%',
-        heigth: 40,
-        backgroundColor: '#3fffa3',
+        height: 40,
+        backgroundColor: '#050505',
         borderRadius: 4,
         justifyContent: 'center',
         alignItems: 'center'
@@ -94,6 +94,6 @@ const styles = StyleSheet.create({
     buttonText:{
         fontSize: 18,
         fontWeight: 'bold',
-        color: '#101026'
+        color: '#fff'
     }
 })

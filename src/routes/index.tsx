@@ -18,11 +18,12 @@ function Routes(): React.JSX.Element{
                 flex:1,
                 backgroundColor: '#1d1d2e',
                 justifyContent: 'center',
-                alignContent: 'center'
+                alignContent: 'stretch'
             }}>
 
                 <ActivityIndicator size={60} color={"#fff"}/>
             </View>
+            
         )
     } else { 
         return(
