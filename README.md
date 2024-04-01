@@ -6,7 +6,7 @@ $ expo --version
 $ expo init app-plantas
 
 // Rodar Projeto
-$ expo start
+$ npx expo start
 
 // React Navigation está sendo usado para a navegação
 $ npm install @react-navigation/native
@@ -27,3 +27,11 @@ $ expo install @react-native-async-storage/async-storage
 
 -- Axios para requisição ao servidor
 $ expo install axios
+
+-- Instalar React Navigator Drawer para rolagem na barra lateral
+$ npm install @react-navigation/drawer
+
+-- As bibliotecas:
+$ npm install react-native-gesture-handler react-native-reanimated
+
+$ npx pod -install ios

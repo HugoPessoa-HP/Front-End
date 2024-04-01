@@ -1,15 +1,17 @@
-import React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import React from 'react';
+//import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import Dashboard from '../pages/Principal';
+import Principal from '../pages/Principal';
 
-const Stack = createNativeStackNavigator();
+//const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 function AppRoutes(){
     return(
-        <Stack.Navigator>
-            <Stack.Screen name='Dashboard' component={Dashboard}/>
-        </Stack.Navigator>
+        <Drawer.Navigator>
+            <Drawer.Screen name='Principal' component={Principal}/>
+        </Drawer.Navigator>
     )
 }
 

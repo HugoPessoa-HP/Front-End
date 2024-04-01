@@ -10,18 +10,18 @@ function Routes(): React.JSX.Element{
 
     //Controllar se usuário está logado ou não.
     const { isAuthenticated, loading } = useContext(AuthContext);
-
+    
     if(loading){
         return(
             <View
             style={{
                 flex:1,
-                backgroundColor: '#1d1d2e',
+                backgroundColor: '#ffffff',
                 justifyContent: 'center',
                 alignContent: 'stretch'
             }}>
 
-                <ActivityIndicator size={60} color={"#fff"}/>
+                <ActivityIndicator size={60} color={"#1D1D2E"}/>
             </View>
             
         )

@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 type AuthContextData = {
     pesquisador: PesquisadorProps;
     isAuthenticated: boolean;
-    loginI: (credencial: LoginProps) => Promise<void>;
+    loginI: (credentials: LoginProps) => Promise<void>;
     loadingAuth: boolean;
     loading: boolean;
     logout: () => Promise<void>;
@@ -35,28 +35,30 @@ export function Context({children}: AuthProviderProps){
         email: '',
         cpf: '',
         token: '',
-    });
+    }); 
 
     const isAuthenticated = !!pesquisador.nome;
 
     const [loadingAuth, setLoadingAuth] = useState(false);
-    const [loading, setLoading] = useState(false);
-/*
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
 
     async function getPesquisador(){  
 
+            // Pegar os dados salvos do usuário
             const pesquisador = await AsyncStorage.getItem('pesquisador');
-            let hasUser: Pesquisador = JSON.parse(pesquisador || '{}')
+            let hasPesquisador: PesquisadorProps = JSON.parse(pesquisador || '{}')
 
-            if(Object.keys(hasUser).length > 0){
-                api.defaults.headers.common['Authorization'] = `Beader ${hasUser.token}`
+            // Verificar se recebemos a informação
+            if(Object.keys(hasPesquisador).length > 0){
+                api.defaults.headers.common['Authorization'] = `Beader ${hasPesquisador.token}`
 
                 setPesquisador({
-                    id: hasUser.id,
-                    name: hasUser.name,
-                    email:hasUser.email,
-                    token: hasUser.token,
+                    nome: hasPesquisador.nome,
+                    email:hasPesquisador.email,
+                    cpf: hasPesquisador.cpf,
+                    token: hasPesquisador.token,
                 })
             }
 
@@ -67,7 +69,7 @@ export function Context({children}: AuthProviderProps){
         getPesquisador();
 
     }, [])
-*/
+
     async function loginI({email, password}: LoginProps){
         setLoadingAuth(true);
 
@@ -80,13 +82,13 @@ export function Context({children}: AuthProviderProps){
           const { nome, cpf, token } = response.data;
 
             const data = {
-                ...(await response).data
+                ...response.data
             };
 
 
             await AsyncStorage.setItem('@pesquisador', JSON.stringify(data))
 
-            api.defaults.headers.common['Authorization'] = `Beader ${token}`
+            api.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
             setPesquisador({
                 nome,
@@ -98,7 +100,7 @@ export function Context({children}: AuthProviderProps){
             setLoadingAuth(false);
 
         }catch(err){
-            console.log(" Erro ao realizar Login ")
+            console.log(" Erro ao Realizar Login ")
             setLoadingAuth(false);
         }
     }
@@ -108,11 +110,11 @@ export function Context({children}: AuthProviderProps){
         .then( () => {
             setPesquisador({
                 nome: '',
-                cpf: '',
                 email: '',
+                cpf: '',
                 token: '',
             })
-        } )
+        })
     }
 
     return(
