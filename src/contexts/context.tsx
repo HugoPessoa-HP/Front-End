@@ -29,7 +29,7 @@ type PesquisadorProps = {
 
 export const AuthContext = createContext({} as AuthContextData);
 
-export function Context({children}: AuthProviderProps){
+export function ContextProvider({children}: AuthProviderProps){
     const [pesquisador, setPesquisador] = useState<PesquisadorProps>({
         nome: '',
         email: '',
@@ -74,6 +74,7 @@ export function Context({children}: AuthProviderProps){
         setLoadingAuth(true);
 
         try{
+            console.log("Olá")
             const response = await api.post('/login', {
                 email,
                 password
@@ -84,7 +85,6 @@ export function Context({children}: AuthProviderProps){
             const data = {
                 ...response.data
             };
-
 
             await AsyncStorage.setItem('@pesquisador', JSON.stringify(data))
 
@@ -100,7 +100,7 @@ export function Context({children}: AuthProviderProps){
             setLoadingAuth(false);
 
         }catch(err){
-            console.log(" Erro ao Realizar Login ")
+            console.log(" Erro ao Realizar Login ");
             setLoadingAuth(false);
         }
     }

@@ -6,7 +6,7 @@ import { View, ActivityIndicator } from "react-native";
 import AppRoutes from "./on.routes"
 import AuthRoutes from "./off.routes";
 
-function Routes(): React.JSX.Element{
+function Routes(){
 
     //Controllar se usuário está logado ou não.
     const { isAuthenticated, loading } = useContext(AuthContext);

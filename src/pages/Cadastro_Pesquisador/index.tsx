@@ -27,10 +27,9 @@ export default function CadastroPesquisador(){
 
         
     }
-    
 
     return(
-    <View >
+    <View style={styles.container}>
         <View style={styles.inputContainer}>
             <TextInput
             placeholder='Digite seu Nome'

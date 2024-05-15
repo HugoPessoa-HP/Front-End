@@ -35,3 +35,20 @@ $ npm install @react-navigation/drawer
 $ npm install react-native-gesture-handler react-native-reanimated
 
 $ npx pod -install ios
+
+npx expo install react-native-reanimated
+
+npm install --save-dev @babel/preset-react
+
+npm install --save-dev @babel/plugin-syntax-jsx
+
+// Bibliotecas Google Maps
+
+- MapView (Poder exibir e manipular o mapa na aplicação);
+$ npx expo install react-native-maps
+
+- Expo Location (Obter dados de localização do Usuário)
+$ npx expo install expo-location
+
+//Navegação
+$ npm install @react-navigation/bottom-tabs
