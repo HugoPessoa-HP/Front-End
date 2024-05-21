@@ -8,7 +8,6 @@ import { StyleSheet,
     ActivityIndicator
  } from 'react-native';
 
-
 import { AuthContext } from '../../contexts/context';
 
 export default function CadastroPesquisador(){

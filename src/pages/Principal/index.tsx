@@ -1,40 +1,67 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { View, Text, Button, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, Button, StyleSheet, TouchableOpacity , FlatList } from 'react-native'
 import { AuthContext } from '../../contexts/context'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
+import { Feather } from '@expo/vector-icons'
 import { useNavigation } from '@react-navigation/native';
-import { requestForegroundPermissionsAsync , 
+import { requestForegroundPermissionsAsync ,
          getCurrentPositionAsync , 
          LocationObject ,
-         watchPositionAsync, 
-         LocationAccuracy} from 'expo-location';
+         watchPositionAsync,
+         LocationAccuracy } from 'expo-location';
 import MapView from 'react-native-maps';
 
 import { api } from '../../services/API';
 import { Marker } from 'react-native-maps';
+import { Float } from 'react-native/Libraries/Types/CodegenTypes';
+import { ScrollView } from 'react-native-gesture-handler';
 
 type PlantasProps = {
     id: string;
-    vernaculo1: string;
-    vernaculo2: string;
-    vernaculo3: string;
     nome_Cientifico: string;
     familia: string;
+    vernaculo1: string;
+    vernaculo2: string;
     origem: string;
     habito: string;
+    categoria: string;
+}
+
+type NumeroPlantasProps = {
+    numero: Float;
 }
 
 export default function Principal(){
-    const { logout } = useContext(AuthContext);
+    const { logout , estado } = useContext(AuthContext);
     const [location, setLocation] = useState<LocationObject | null>(null);
     const [planta, setPlanta] = useState<PlantasProps[] | []>([]);
-    const [numeroPlantas, setNumeroPlantas] = useState();
+    const [numeroPlantas, setNumeroPlantas] = useState<NumeroPlantasProps | []>();
     //const [ familias, setPlanta ] = useState();
     //var arrayFamilias = [];
     //var arrayHabitos = [];
     //var arrayOrigens = [];
 
+    async function mapa(){
+        const { granted } = await requestForegroundPermissionsAsync();
+
+        if(granted){
+         const currentPosition = await getCurrentPositionAsync();
+         setLocation(currentPosition);
+        }
+
+        watchPositionAsync({
+            accuracy: LocationAccuracy.Highest,
+            timeInterval: 1000,
+            distanceInterval: 1
+        }, (response) => {
+            console.log("Nova Localização");
+            setLocation(response);
+        });
+
+    }
+
+    /*
     async function requestLocation() {
         const { granted } = await requestForegroundPermissionsAsync();
 
@@ -43,56 +70,19 @@ export default function Principal(){
          setLocation(currentPosition);
         }
     }
+    */
 
-    useEffect(() => {
-    async function listaPlantas(){
+    /*useEffect(() => {
+    async function listaEstados(){
+        estado
 
-        const plantas = await api.get('/plantas');
-        const dataPlantas = await plantas.data;
-        const lengthDataPlantas = dataPlantas.length;
-        setNumeroPlantas(lengthDataPlantas);
-        setPlanta(dataPlantas);
-        
-        /*
-        var i;
-        for(i = 0; i < lengthData; i++){
-            const familia = await data[i].familia;
-            const habito = await data[i].habito;
-            const origem = await data[i].origem;
-            
-            if((familia == null) || (familia == undefined) || (familia == '')){
-                var nomeFamilia = "Não informou Familia";
-            } else {
-                var nomeFamilia = JSON.stringify(familia);
-            }
-            await arrayFamilias.push(nomeFamilia);
-            console.log(nomeFamilia);
+    }
 
-            if((habito == null) || (habito == undefined) || (habito == '')){
-                var nomeHabito = "Não informou Hábito";
-            } else {
-                var nomeHabito = JSON.stringify(habito);
-            }
-            //await setPlanta(nomesFamilias);
-            await arrayHabitos.push(nomeHabito);
-            console.log(nomeHabito);
-
-            if((origem == null) || (origem == undefined) || (origem == '')){
-                var nomeOrigem = "Não informou Familia";
-            } else {
-                var nomeOrigem = JSON.stringify(origem);
-            }
-            await arrayOrigens.push(nomeOrigem);
-            console.log(nomeOrigem);
-            
-        }
-
-        return data;
-        */
-        }
-        listaPlantas();
-    }, []);
-
+        listaEstados();
+    },[]);
+    */
+   
+    /*
     useEffect(() =>{
         requestLocation();
     }, []);
@@ -107,16 +97,18 @@ export default function Principal(){
         setLocation(response);
     });
    }, []);
+   */
 
     return(
         <SafeAreaView style={styles.container}>
-            <TouchableOpacity style={styles.button} onPress={logout}>
-                <Text style={styles.buttonText}> {planta[0]?.familia} </Text>
-                <Text style={styles.buttonText}> {planta[0]?.habito} </Text>
-                <Text style={styles.buttonText}> {planta[0]?.origem} </Text>
-                <Text style={styles.buttonText}> {planta[0]?.nome_Cientifico} </Text>
-            </TouchableOpacity>
+            <View style={styles.location}>
+                <TouchableOpacity style={styles.header} onPress={mapa}>
+                    <Feather name='map-pin' size={28} color="#fff"/>
+                    <Text style={styles.buttonText}> Escolha sua Localização </Text>
+                </TouchableOpacity>
+            </View>
 
+            
             {   location &&
                 <MapView style={styles.map}
                 initialRegion={{
@@ -132,13 +124,23 @@ export default function Principal(){
                         }}
                     />
                 </MapView>
-                
             }
         </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
+    header:{
+        flexDirection: 'row',
+        marginBottom: 14,
+        marginTop: 14,
+        alignItems: 'flex-start',
+        paddingHorizontal: 12
+    },
+    location: {
+        backgroundColor: '#13a137',
+        width: '100%'
+    },
     map:{
         flex: 1,
         width: '100%',
@@ -148,7 +150,7 @@ const styles = StyleSheet.create({
       flex:1,
       justifyContent: 'flex-start',
       alignItems: 'flex-start',
-      paddingVertical: 14,
+      paddingVertical: 0,
       backgroundColor: '#fff',
       flexDirection: 'column'  
     },
@@ -183,7 +185,11 @@ const styles = StyleSheet.create({
     buttonText:{
         fontSize: 18,
         fontWeight: 'bold',
-        color: '#050505',
-        justifyContent: 'flex-start'
+        color: '#fff',
+        justifyContent: 'flex-start',
+        paddingHorizontal: 8
+    },
+    list:{
+
     }
 })

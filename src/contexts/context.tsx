@@ -9,6 +9,7 @@ type AuthContextData = {
     loadingAuth: boolean;
     loading: boolean;
     logout: () => Promise<void>;
+    estado: EstadosProps | [];
 }
 
 type AuthProviderProps = {
@@ -27,6 +28,10 @@ type PesquisadorProps = {
     token: string;
 }
 
+type EstadosProps = {
+    nome_Estado: string
+}
+
 export const AuthContext = createContext({} as AuthContextData);
 
 export function ContextProvider({children}: AuthProviderProps){
@@ -41,6 +46,7 @@ export function ContextProvider({children}: AuthProviderProps){
 
     const [loadingAuth, setLoadingAuth] = useState(false);
     const [loading, setLoading] = useState(true);
+    const [estado, setEstado] = useState<EstadosProps | []>([])
 
     useEffect(() => {
 
@@ -70,17 +76,25 @@ export function ContextProvider({children}: AuthProviderProps){
 
     }, [])
 
+    useEffect(() => {
+        async function listaEstados(){
+            const estados = await api.get('/estados');
+            setEstado(estados.data);
+        }
+        listaEstados();
+    }, [])
+
     async function loginI({email, password}: LoginProps){
         setLoadingAuth(true);
 
         try{
-            console.log("Olá")
+        
             const response = await api.post('/login', {
                 email,
                 password
             })
 
-          const { nome, cpf, token } = response.data;
+          /*const { nome, cpf, token } = response.data;
 
             const data = {
                 ...response.data
@@ -96,7 +110,7 @@ export function ContextProvider({children}: AuthProviderProps){
                 cpf,
                 token,
             })
-
+            */
             setLoadingAuth(false);
 
         }catch(err){
@@ -118,7 +132,7 @@ export function ContextProvider({children}: AuthProviderProps){
     }
 
     return(
-        <AuthContext.Provider value={{ pesquisador, isAuthenticated, loginI, loadingAuth, loading, logout}}>
+        <AuthContext.Provider value={{ pesquisador, isAuthenticated, loginI, loadingAuth, loading, logout, estado}}>
             {children}
 
         </AuthContext.Provider>
