@@ -98,17 +98,17 @@ input:{
     paddingHorizontal: 8,
     color: '#050505'
 },
-button:{
-    width: '95%',
-    height: 40,
-    backgroundColor: '#050505',
-    borderRadius: 4,
-    justifyContent: 'center',
-    alignItems: 'center'
-},
-buttonText:{
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#fff'
-}
+    button:{
+        width: '95%',
+        height: 40,
+        backgroundColor: '#050505',
+        borderRadius: 4,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    buttonText:{
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#fff'
+    }
 })

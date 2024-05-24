@@ -52,3 +52,9 @@ $ npx expo install expo-location
 
 //Navegação
 $ npm install @react-navigation/bottom-tabs
+
+// Busca do Google Maps
+$ npm install react-native-google-places-autocomplete --save
+
+// Instalar Câmera
+$ npx expo install expo-camera

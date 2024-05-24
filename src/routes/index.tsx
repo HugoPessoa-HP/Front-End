@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../contexts/context";
+import { NavigationContainer } from "@react-navigation/native";
 
 import { View, ActivityIndicator } from "react-native";
 
-import AppRoutes from "./on.routes"
+import AppRoutes from "./onDrawer.routes";
 import AuthRoutes from "./off.routes";
+import TabRoutes from "./onTab.routes";
 
 function Routes(){
 
@@ -27,9 +29,8 @@ function Routes(){
         )
     } else { 
         return(
-            isAuthenticated ? <AppRoutes/> : <AppRoutes/>
+            isAuthenticated ? (<AppRoutes/> && <TabRoutes/>): ( <AuthRoutes/>)
         )
     }
 }
-
 export default Routes

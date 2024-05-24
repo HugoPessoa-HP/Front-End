@@ -8,13 +8,14 @@ import { StyleSheet,
     ActivityIndicator,
     Modal
 } from 'react-native';
-import { ModalClass } from '../../Components/ModalClass'
 
+import { ModalClass } from '../../Components/ModalClass'
 import { api } from '../../services/API';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthContext } from '../../contexts/context';
-
+//import { ViewCamera } from '../../Components/camera';
 export interface ClassProps{
+    id: string;
     class: string;
 }
 
@@ -24,49 +25,77 @@ export default function CadastroDicotomicaOrigem(){
     const [ categoria, setCategoria] = useState('');
     
     const [ class1, setClass1 ] = useState<ClassProps[] | []>([]);
-    const [ class1Selected, setClass1Selected] = useState<ClassProps>();
-    const [ modalClass1, setModalClass1 ] = useState(false);
-    
-    async function InserirDadosDicotomica(){
-        if(categoria === ''){
-            return;
-        }
-    }
+    const [ class1Selected, setClass1Selected] = useState<ClassProps | undefined>();
+    const [ modalClass1Visible, setModalClass1Visible ] = useState(false);
 
-    async function CadastrarCategoriaPlanta(){
+    const [ class2, setClass2 ] = useState<ClassProps[] | []>([]);
+    const [ class2Selected, setClass2Selected ] = useState<ClassProps | undefined>()
+    const [ modalClassVisible, setModalClassVisible ] = useState(false);
+    
+    useEffect(() => {
+        async function loadInfo() {
+            const itemClass1 = [{id: '1', class: 'Espécies Nativas (inclui cosmopolitas)'}, 
+            {id: '2', class: 'Espécies Exóticas (não indígenas, não nativas, exóticas)'}]
+            setClass1(itemClass1)
+            console.log(itemClass1)
+            //const response = await api.get('/pesquisadores');
+            //sconsole.log(response.data)
+        }
+
+        loadInfo();
+    }, []);
+
+    useEffect(() => {
+
+        async function loadInfo() {
+            const response = await api.get('/rota', {
+                params: {
+                    id: class1Selected?.class
+                }
+            }) 
+        }
+
+        loadInfo()
+
+    }, [class1Selected])
+
+    async function InserirDadosDicotomica(){
         if(categoria === ''){
             return;
         }
         const response = await api.post('/plantaStudent', {
             categoria: categoria })
     }
-
-    useEffect(() => {
-        async function loadInfo() {
-            
-        }
-
-        loadInfo();
-    }, []);
-
+    
     function classCategory(item: ClassProps){
         setClass1Selected(item);
     }
 
+    async function TirarFoto(){
+        return(
+            //<ViewCamera/>
+            console.log("Olá")
+        )
+    }
+
     return(
-        <SafeAreaView style={styles.container}>
+        
+        <View style={styles.container}>
             {
-            <TouchableOpacity style={styles.input} onPress={ () => setModalClass1(true) }>
+            <TouchableOpacity style={styles.input} onPress={ () => setModalClass1Visible(true) }>
                 <Text> {class1Selected?.class} </Text>
             </TouchableOpacity>
             }
-            <Modal transparent={true} visible={modalClass1} animationType="fade">
-                <ModalClass handleCloseModal={ () => setModalClass1(false) }
+            <Modal transparent={true} visible={modalClass1Visible} animationType="fade">
+                <ModalClass handleCloseModal={ () => setModalClass1Visible(false) }
                             options={class1}
-                            selectedItem={ () => { setClass1Selected }}
+                            selectedItem={ () => { classCategory }}
                 />
             </Modal>
-        </SafeAreaView>
+            <TouchableOpacity style={styles.button} onPress={TirarFoto}>
+                <Text style={styles.buttonText} > Tirar Foto </Text>
+            </TouchableOpacity>
+        </View>
     )
 }
 
@@ -92,7 +121,7 @@ inputContainer:{
 input:{
     width: '100%',
     height: 40,
-    backgroundColor: '#101026',
+    backgroundColor: '#424253',
     marginBottom: 12,
     borderRadius: 4,
     color: '#f0f0f0',

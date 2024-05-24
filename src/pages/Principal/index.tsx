@@ -9,8 +9,10 @@ import { requestForegroundPermissionsAsync ,
          getCurrentPositionAsync , 
          LocationObject ,
          watchPositionAsync,
-         LocationAccuracy } from 'expo-location';
-import MapView from 'react-native-maps';
+         LocationAccuracy, 
+         watchHeadingAsync,} from 'expo-location';
+import * as location from 'expo-location';
+import MapView , {Polygon , Callout} from 'react-native-maps';
 
 import { api } from '../../services/API';
 import { Marker } from 'react-native-maps';
@@ -35,12 +37,14 @@ type NumeroPlantasProps = {
 export default function Principal(){
     const { logout , estado } = useContext(AuthContext);
     const [location, setLocation] = useState<LocationObject | null>(null);
+    const [ marker, setMarker] = useState([]);
     const [planta, setPlanta] = useState<PlantasProps[] | []>([]);
     const [numeroPlantas, setNumeroPlantas] = useState<NumeroPlantasProps | []>();
     //const [ familias, setPlanta ] = useState();
     //var arrayFamilias = [];
     //var arrayHabitos = [];
     //var arrayOrigens = [];
+
 
     async function mapa(){
         const { granted } = await requestForegroundPermissionsAsync();
@@ -55,11 +59,14 @@ export default function Principal(){
             timeInterval: 1000,
             distanceInterval: 1
         }, (response) => {
-            console.log("Nova Localização");
+            console.log("Nova Localização", response);
             setLocation(response);
         });
-
     }
+
+    //const handleNewMarker = (coordinate) => {
+    //    setMarker([...marker, coordinate]);     
+    //};
 
     /*
     async function requestLocation() {
@@ -108,7 +115,6 @@ export default function Principal(){
                 </TouchableOpacity>
             </View>
 
-            
             {   location &&
                 <MapView style={styles.map}
                 initialRegion={{
@@ -116,13 +122,19 @@ export default function Principal(){
                     longitude: location.coords.longitude,
                     latitudeDelta: 0.005,
                     longitudeDelta: 0.005
-                }}>
+                }}
+                //onPress={(e) => handleNewMarker(e.nativeEvent.coordinate)}
+                showsUserLocation
+                loadingEnabled
+                mapType="terrain"
+                >
                     <Marker
                         coordinate={{
                             latitude: location.coords.latitude,
                             longitude: location.coords.longitude
                         }}
                     />
+
                 </MapView>
             }
         </SafeAreaView>

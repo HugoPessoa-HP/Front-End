@@ -13,7 +13,6 @@ const Drawer = createDrawerNavigator();
 function AppRoutes(){
     return(
         <Drawer.Navigator>
-            <Drawer.Screen name='Menu' component={Principal}/>
             <Drawer.Screen name='Cadastro Plantas' component={CadastroLocal}/>
             <Drawer.Screen name='Cadastro Chave Dicotômica' component={CadastroDicotomicaOrigem}/>        
         </Drawer.Navigator>

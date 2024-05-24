@@ -9,7 +9,7 @@ interface ModalClassCategory {
     selectedItem: (item: ClassProps) => void;
 }
 
-const { width: WIDTH , height: HEIGTH } = Dimensions.get('window');
+const { width: WIDTH , height: HEIGHT } = Dimensions.get('window');
 
 export function ModalClass({options, handleCloseModal, selectedItem}: ModalClassCategory){
 
@@ -31,10 +31,9 @@ export function ModalClass({options, handleCloseModal, selectedItem}: ModalClass
         <TouchableOpacity style={styles.container} onPress={handleCloseModal}>
             <View style={styles.content}>
                 <ScrollView showsVerticalScrollIndicator={false}>
-                    {option}
+                    
                 </ScrollView>
             </View>
-
         </TouchableOpacity>
     )
 }
@@ -47,14 +46,14 @@ const styles = StyleSheet.create({
     },
     content: {
         width: WIDTH - 20,
-        height: HEIGTH / 2,
+        height: HEIGHT / 3,
         backgroundColor: '#fff',
         borderWidth: 1,
         borderColor: '#8a8a8a',
         borderRadius: 4
     },
     optionStyle: {
-        alignItems: 'flex-start',
+        alignItems: 'center',
         borderTopWidth: 1
         
     },
