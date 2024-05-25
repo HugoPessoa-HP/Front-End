@@ -94,7 +94,7 @@ export function ContextProvider({children}: AuthProviderProps){
                 password
             })
 
-          /*const { nome, cpf, token } = response.data;
+          const { nome, cpf, token } = response.data;
 
             const data = {
                 ...response.data
@@ -110,7 +110,7 @@ export function ContextProvider({children}: AuthProviderProps){
                 cpf,
                 token,
             })
-            */
+            
             setLoadingAuth(false);
 
         }catch(err){

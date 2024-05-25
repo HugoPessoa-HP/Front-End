@@ -58,3 +58,6 @@ $ npm install react-native-google-places-autocomplete --save
 
 // Instalar Câmera
 $ npx expo install expo-camera
+
+// React Native Vision Camera 
+$ expo install react-native-vision-camera

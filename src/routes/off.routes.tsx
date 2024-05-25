@@ -1,5 +1,5 @@
-import React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Login from '../pages/login';
 
@@ -13,4 +13,4 @@ function AuthRoutes(){
     )
 }
 
-export default AuthRoutes 
+export default AuthRoutes

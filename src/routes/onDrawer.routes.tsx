@@ -1,20 +1,35 @@
 import React from 'react';
 //import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { Feather } from '@expo/vector-icons';
 
 import Principal from '../pages/Principal';
-import CadastroLocal from '../pages/Cadastro_Local';
+import CadastroPlantas from '../pages/Cadastro_Planta';
 import CadastroDicotomicaOrigem from '../pages/Chave_Dicotomica';
+import TabRoutes from './onTab.routes';
 
 //const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
 function AppRoutes(){
     return(
-        <Drawer.Navigator>
-            <Drawer.Screen name='Cadastro Plantas' component={CadastroLocal}/>
-            <Drawer.Screen name='Cadastro Chave Dicotômica' component={CadastroDicotomicaOrigem}/>        
+        <Drawer.Navigator screenOptions={{ title: '' }}>
+            <Drawer.Screen name='Home' component={Principal}
+            options={{
+                drawerIcon: ({color, size}) => <Feather name='home' color={color} size={size}/>,
+                drawerLabel: 'Home'
+            }}
+            />
+            <Drawer.Screen name='Cadastro Plantas' component={CadastroPlantas}
+            options={{
+                drawerLabel: 'Cadastro Plantas'
+            }}
+            />
+            <Drawer.Screen name='Cadastro Chave Dicotômica' component={CadastroDicotomicaOrigem}
+            options={{
+                drawerLabel: 'Chave Dicotômica'
+            }}
+            />        
         </Drawer.Navigator>
     )
 }

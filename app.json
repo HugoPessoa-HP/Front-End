@@ -7,7 +7,12 @@
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
           "recordAudioAndroid": true
         }
-      ]
+      ],
+      "react-native-vision-camera",{
+        "cameraPermissionText": "${PRODUCT_NAME} needs access to your Camera.",
+        "enableMicrophonePermission": false,
+        "microphonePermissonText": "${PRODUCT_NAME} needs access to your Microphone"
+      }
     ],
     "name": "app-plantas",
     "slug": "app-plantas",

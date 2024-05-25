@@ -22,15 +22,14 @@ function Routes(){
                 justifyContent: 'center',
                 alignContent: 'stretch'
             }}>
-
                 <ActivityIndicator size={60} color={"#1D1D2E"}/>
             </View>
-            
+
         )
-    } else { 
+    } else {
         return(
-            isAuthenticated ? (<AppRoutes/> && <TabRoutes/>): ( <AuthRoutes/>)
+            isAuthenticated ? <TabRoutes/> : <AuthRoutes/>
         )
     }
 }
-export default Routes
+export default Routes;

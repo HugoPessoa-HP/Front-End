@@ -13,6 +13,10 @@ import { ModalClass } from '../../Components/ModalClass'
 import { api } from '../../services/API';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthContext } from '../../contexts/context';
+import { useNavigation } from '@react-navigation/native';
+
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackParamsFoto } from '../../routes/onStack.routes';
 //import { ViewCamera } from '../../Components/camera';
 export interface ClassProps{
     id: string;
@@ -21,7 +25,7 @@ export interface ClassProps{
 
 export default function CadastroDicotomicaOrigem(){
 
-    const { isAuthenticated , loading } = useContext(AuthContext);
+    const navigation = useNavigation<NativeStackNavigationProp<StackParamsFoto>>();
     const [ categoria, setCategoria] = useState('');
     
     const [ class1, setClass1 ] = useState<ClassProps[] | []>([]);
@@ -72,10 +76,11 @@ export default function CadastroDicotomicaOrigem(){
     }
 
     async function TirarFoto(){
-        return(
             //<ViewCamera/>
             console.log("Olá")
-        )
+
+            // Navegar a próxima tela.
+            navigation.navigate('Foto');
     }
 
     return(
