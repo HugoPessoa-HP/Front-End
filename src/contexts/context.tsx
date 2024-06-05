@@ -88,20 +88,17 @@ export function ContextProvider({children}: AuthProviderProps){
         setLoadingAuth(true);
 
         try{
-        
             const response = await api.post('/login', {
                 email,
                 password
             })
-
-          const { nome, cpf, token } = response.data;
+            const { nome, cpf, token } = response.data;
 
             const data = {
                 ...response.data
             };
 
             await AsyncStorage.setItem('@pesquisador', JSON.stringify(data))
-
             api.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
             setPesquisador({
@@ -112,7 +109,7 @@ export function ContextProvider({children}: AuthProviderProps){
             })
             
             setLoadingAuth(false);
-
+            
         }catch(err){
             console.log(" Erro ao Realizar Login ");
             setLoadingAuth(false);

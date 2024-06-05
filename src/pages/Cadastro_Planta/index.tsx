@@ -10,7 +10,7 @@ import { View,
 
 import { AuthContext } from '../../contexts/context';
 
-export default function Login(){
+export default function CadastroPlantaPesquisador(){
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -46,7 +46,7 @@ export default function Login(){
                 onChangeText={setPassword}
                 />
 
-                <TouchableOpacity style={styles.button} onPress={login}>
+                <TouchableOpacity style={styles.button} onPress={CadastroPlantaPesquisador}>
                     { loadingAuth ? (
                         <ActivityIndicator size={40} color="#fff"/>
                     ) : (
@@ -63,13 +63,14 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        paddingStart: '4%',
     },
     logo:{
         marginBottom: 18
     },
     inputContainer:{
-        width: '95%',
+        width: '100%',
         paddingVertical: 32,
         paddingHorizontal: 14
     },
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     button:{
         width: '95%',
         height: 40,
-        backgroundColor: '#050505',
+        backgroundColor: '#13a137',
         borderRadius: 4,
         justifyContent: 'center',
         alignItems: 'center'

@@ -7,6 +7,7 @@ import Principal from '../pages/Principal';
 import CadastroPlantas from '../pages/Cadastro_Planta';
 import CadastroDicotomicaOrigem from '../pages/Chave_Dicotomica';
 import TabRoutes from './onTab.routes';
+import CadastroPesquisador from '../pages/Cadastro_Pesquisador';
 
 //const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -29,7 +30,12 @@ function AppRoutes(){
             options={{
                 drawerLabel: 'Chave Dicotômica'
             }}
-            />        
+            />
+            <Drawer.Screen name='Cadastro Pesquisador' component={CadastroPesquisador}
+            options={{
+                drawerLabel: 'Chave Pesquisador'
+            }}
+            />
         </Drawer.Navigator>
     )
 }

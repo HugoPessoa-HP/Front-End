@@ -10,15 +10,15 @@ const Tab = createBottomTabNavigator();
 function TabRoutes(){
     return(
         <Tab.Navigator screenOptions={{ headerShown: false }}>
-            <Tab.Screen name="Menu" component={AppRoutes} 
+            <Tab.Screen name="Menu" component={AppRoutes}
             options={{
-                tabBarIcon: ({ color , size }) => <Feather name="home" color={color} size={size}/>,
+                tabBarIcon: ({ color , size }) => <Feather name="home" color='#13a137' size={28}/>,
                 tabBarLabel: 'Home'
              }}
              />
              <Tab.Screen name="Foto" component={StackRoutes}
              options={{
-                tabBarIcon: ({ color , size }) => <Feather name="camera" color={color} size={size}/>,
+                tabBarIcon: ({ color , size }) => <Feather name="camera" color='#13a137' size={28}/>,
                 tabBarLabel: 'Foto'
                     
              }}

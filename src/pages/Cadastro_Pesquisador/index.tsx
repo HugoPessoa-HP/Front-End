@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext } from 'react';
 import { StyleSheet,
     Image,
     View,
@@ -9,22 +9,36 @@ import { StyleSheet,
  } from 'react-native';
 
 import { AuthContext } from '../../contexts/context';
+import { api } from '../../services/API'
 
 export default function CadastroPesquisador(){
 
     const { isAuthenticated , loading } = useContext(AuthContext);
+    const [ loadingAuth, setLoadingAuth ] = useState(false);
 
     const [email, setEmail] = useState('');
-    const [senha, setSenha] = useState('');
+    const [password, setSenha] = useState('');
     const [nome, setNome] = useState('');
     const [cpf, setCPF] = useState('');
 
     async function InserirDadosPesquisador(){
-        if(email === '' || nome === '' || senha === '' || cpf === ''){
+        if(email === '' || nome === '' || password === '' || cpf === ''){
             return;
         }
+        setLoadingAuth(true)
+        try{
+            const response = await api.post('/pesquisador',{
+                nome,
+                email,
+                cpf,
+                password
+            })
+        }catch(error){
+            console.log(" Erro ao Realizar Cadastro ");
+            setLoadingAuth(true);
+        }
 
-        
+        setLoadingAuth(true);
     }
 
     return(
@@ -55,7 +69,8 @@ export default function CadastroPesquisador(){
             placeholder='Sua senha'
             style={styles.input}
             placeholderTextColor="#050505"
-            value={senha}
+            secureTextEntry={true}
+            value={password}
             onChangeText={setSenha}
             />
 
@@ -63,7 +78,7 @@ export default function CadastroPesquisador(){
                 { loading ? (
                     <ActivityIndicator size={40} color="#fff"/>
                 ) : (
-                    <Text style={styles.buttonText}> Acessar </Text>
+                    <Text style={styles.buttonText}> Cadastrar Pesquisador </Text>
                 )}
                 
             </TouchableOpacity>
@@ -76,15 +91,22 @@ export default function CadastroPesquisador(){
 const styles = StyleSheet.create({
 container:{
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#13a137'
+    backgroundColor: '#fff',
+    paddingEnd: '4%',
+    paddingStart: '4%'
+},
+text:{
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginVertical: 20,
 },
 logo:{
     marginBottom: 18
 },
 inputContainer:{
-    width: '95%',
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 32,
@@ -97,12 +119,12 @@ input:{
     marginBottom: 12,
     borderRadius: 4,
     paddingHorizontal: 8,
-    color: '#050505'
+    color: '#050505',
 },
 button:{
     width: '95%',
     height: 40,
-    backgroundColor: '#050505',
+    backgroundColor: '#13a137',
     borderRadius: 4,
     justifyContent: 'center',
     alignItems: 'center'

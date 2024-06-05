@@ -38,8 +38,8 @@ export default function Principal(){
     const { logout , estado } = useContext(AuthContext);
     const [location, setLocation] = useState<LocationObject | null>(null);
     const [ marker, setMarker] = useState([]);
-    const [planta, setPlanta] = useState<PlantasProps[] | []>([]);
-    const [numeroPlantas, setNumeroPlantas] = useState<NumeroPlantasProps | []>();
+    const [ planta, setPlanta] = useState<PlantasProps[] | []>([]);
+    const [ numeroPlantas, setNumeroPlantas] = useState<NumeroPlantasProps | []>();
     //const [ familias, setPlanta ] = useState();
     //var arrayFamilias = [];
     //var arrayHabitos = [];
@@ -63,7 +63,11 @@ export default function Principal(){
             setLocation(response);
         });
     }
-
+    /*
+    const positionMarker = () => {
+        setLocation(coordinate);
+    }
+    */
     //const handleNewMarker = (coordinate) => {
     //    setMarker([...marker, coordinate]);     
     //};
@@ -123,12 +127,13 @@ export default function Principal(){
                     latitudeDelta: 0.005,
                     longitudeDelta: 0.005
                 }}
-                //onPress={(e) => handleNewMarker(e.nativeEvent.coordinate)}
+                //onPress={(e) => positionMarker(e.nativeEvent.coordinate)}
                 showsUserLocation
                 loadingEnabled
                 mapType="terrain"
                 >
                     <Marker
+                        tracksViewChanges={false}
                         coordinate={{
                             latitude: location.coords.latitude,
                             longitude: location.coords.longitude

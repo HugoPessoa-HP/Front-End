@@ -14,7 +14,7 @@ function StackRoutes(){
     return(
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Foto" component={Foto}
-             />
+            />
         </Stack.Navigator>
     )
 }
