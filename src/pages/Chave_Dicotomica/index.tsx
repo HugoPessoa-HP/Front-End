@@ -23,27 +23,42 @@ export interface ClassProps{
     class: string;
 }
 
+export interface UserProps{
+    email: string;
+    nome: string;
+}
+
 export default function CadastroDicotomicaOrigem(){
 
     const navigation = useNavigation<NativeStackNavigationProp<StackParamsFoto>>();
-    const [ categoria, setCategoria] = useState('');
+    const [ category, setCategory] = useState('');
     
     const [ class1, setClass1 ] = useState<ClassProps[] | []>([]);
-    const [ class1Selected, setClass1Selected] = useState<ClassProps | undefined>();
-    const [ modalClass1Visible, setModalClass1Visible ] = useState(false);
+    const [ classSelected_1, setClassSelected_1] = useState<ClassProps | undefined>();
+    const [ modalClassVisible_1, setModalClassVisible_1 ] = useState(false);
 
     const [ class2, setClass2 ] = useState<ClassProps[] | []>([]);
-    const [ class2Selected, setClass2Selected ] = useState<ClassProps | undefined>()
-    const [ modalClassVisible, setModalClassVisible ] = useState(false);
-    
+    const [ classSelected_2, setClassSelected_2 ] = useState<ClassProps | undefined>()
+    const [ modalClassVisible_2, setModalClassVisible_2 ] = useState(false);
+
+    const [ class3, setClass3 ] = useState<ClassProps[] | []>([]);
+    const [ clasSelected_3, setClassSelected_3 ] = useState<ClassProps | undefined>()
+    const [ modalClassVisible_3, setModalClassVisible_3 ] = useState(false);
+
+    const [ user, setUser ] = useState<UserProps[] | []>([]);
+    const [ userSelected, setUserSelected ] = useState<UserProps | undefined>()
+    const [ userVisible, setUserVisible ] = useState(false);
+
     useEffect(() => {
         async function loadInfo() {
-            const itemClass1 = [{id: '1', class: 'Espécies Nativas (inclui cosmopolitas)'}, 
+            const itemClass1 = await [{id: '1', class: 'Espécies Nativas (inclui cosmopolitas)'}, 
             {id: '2', class: 'Espécies Exóticas (não indígenas, não nativas, exóticas)'}]
             setClass1(itemClass1)
             console.log(itemClass1)
+            setClassSelected_1(itemClass1[0])
             //const response = await api.get('/pesquisadores');
-            //sconsole.log(response.data)
+            //console.log(response.data)
+            //await setUser(response.data)
         }
 
         loadInfo();
@@ -52,27 +67,57 @@ export default function CadastroDicotomicaOrigem(){
     useEffect(() => {
 
         async function loadInfo() {
-            const response = await api.get('/rota', {
-                params: {
-                    id: class1Selected?.class
-                }
-            }) 
+            if(classSelected_1?.id === '1'){
+                const itemClass2 = [{ id: '1', class: 'Não formam estandes puros ao nível da inibição da regeneração de outras espécies de plantas nativas' },
+                {id: '2', class: 'Forma estandes puros ou domina a comunidade ao nível da inibição da regeneração deoutras espécies de plantas nativas. Especialmente em sítios degradados'}];
+                setClass2(itemClass2);
+                setClassSelected_2(undefined);
+                setClassSelected_3(undefined);
+            } else {
+                const itemClass2 = [{ id: '3', class: 'Ocorre apenas temporariamente, não deixando Descendentes sem contribuição humana de Diásporo' },
+                { id: '4', class: 'Forma populações sustentáveis sem ajuda humana (Plantas naturalizadas)'}];
+                setClass2(itemClass2);
+                setClassSelected_2(undefined);
+                setClassSelected_3(undefined);
+            }
         }
-
         loadInfo()
 
-    }, [class1Selected])
+    }, [classSelected_1])
 
+    useEffect(() => {
+        async function loadInfo(){
+            if(classSelected_2?.id === '1'){
+                setCategory('Espécies Silvestres (nativas não agressivas)')
+            } else if (classSelected_2?.id === '2'){
+                setCategory('Espécies Dominantes (nativas agressivas)')
+            } else if (classSelected_2?.id === '3'){
+                setCategory('Espécies Exóticas transacionais (Alienígenas transitórias)')
+            } else if ( classSelected_2?.id === '4' ){
+                const itemClass3 = [{ id: '1', class: 'Não estabelece, em zonas naturais não perturbadas, Ecossistemas, espalhando-se apenas em Áreas antropizadas (ruderais)' },
+                {id: '2', class: 'Estabelece em ecossistemas naturais não perturbados'}]
+                setClass3(itemClass3);
+            }
+        }
+        loadInfo()
+    }, [classSelected_2])
+
+    /*
     async function InserirDadosDicotomica(){
-        if(categoria === ''){
+        if(category === ''){
             return;
         }
         const response = await api.post('/plantaStudent', {
-            categoria: categoria })
+            categoria: category })
     }
+    */
     
     function classCategory(item: ClassProps){
-        setClass1Selected(item);
+        setClassSelected_1(item);
+    }
+
+    function classCategory_2(item: ClassProps){
+        setClassSelected_2(item);
     }
 
     async function TirarFoto(){
@@ -86,15 +131,33 @@ export default function CadastroDicotomicaOrigem(){
     return(
         
         <View style={styles.container}>
+            <Text style={ styles.text }> Chave Dicotômica </Text>
             {
-            <TouchableOpacity style={styles.input} onPress={ () => setModalClass1Visible(true) }>
-                <Text> {class1Selected?.class} </Text>
+            <TouchableOpacity style={styles.input} onPress={ () => setModalClassVisible_1(true) }>
+                <Text style={{ color: '#050505'}}> {classSelected_1?.class} </Text>
             </TouchableOpacity>
             }
-            <Modal transparent={true} visible={modalClass1Visible} animationType="fade">
-                <ModalClass handleCloseModal={ () => setModalClass1Visible(false) }
+            <Modal transparent={true} 
+            visible={modalClassVisible_1}
+            animationType="fade">
+                <ModalClass 
                             options={class1}
-                            selectedItem={ () => { classCategory }}
+                            handleCloseModal={ () => setModalClassVisible_1(false) }
+                            selectedItem={ classCategory }
+                />
+            </Modal>
+            {
+            <TouchableOpacity style={styles.input} onPress={ () => setModalClassVisible_2(true) }>
+                <Text style={{ color: '#050505'}}> {classSelected_2?.class} </Text>
+            </TouchableOpacity>
+            }
+            <Modal transparent={true} 
+            visible={modalClassVisible_2}
+            animationType="fade">
+                <ModalClass
+                            options={class2}
+                            handleCloseModal={ () => setModalClassVisible_2(false) }
+                            selectedItem={ classCategory_2 }
                 />
             </Modal>
             <TouchableOpacity style={styles.button} onPress={TirarFoto}>
@@ -107,26 +170,29 @@ export default function CadastroDicotomicaOrigem(){
 const styles = StyleSheet.create({
 container:{
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#fff',
     paddingEnd: '4%',
     paddingStart: '4%'
+},
+text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginVertical: 20,
 },
 logo:{
     marginBottom: 18
 },
 inputContainer:{
     width: '95%',
-    alignItems: 'center',
-    justifyContent: 'center',
     paddingVertical: 32,
     paddingHorizontal: 14
 },
 input:{
     width: '100%',
-    height: 40,
-    backgroundColor: '#424253',
+    height: 60,
+    backgroundColor: '#f0f0f0',
     marginBottom: 12,
     borderRadius: 4,
     color: '#f0f0f0',

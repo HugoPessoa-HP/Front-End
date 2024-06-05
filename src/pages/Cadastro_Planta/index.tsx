@@ -70,8 +70,6 @@ const styles = StyleSheet.create({
     },
     inputContainer:{
         width: '95%',
-        alignItems: 'center',
-        justifyContent: 'center',
         paddingVertical: 32,
         paddingHorizontal: 14
     },

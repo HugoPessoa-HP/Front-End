@@ -2,17 +2,13 @@
   "expo": {
     "plugins": [
       [
-        "expo-camera",
+        "react-native-vision-camera",
         {
-          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
-          "recordAudioAndroid": true
+          "cameraPermissionText": "${PRODUCT_NAME} needs access to your Camera.",
+          "enableMicrophonePermission": true,
+          "microphonePermissonText": "${PRODUCT_NAME} needs access to your Microphone"
         }
-      ],
-      "react-native-vision-camera",{
-        "cameraPermissionText": "${PRODUCT_NAME} needs access to your Camera.",
-        "enableMicrophonePermission": false,
-        "microphonePermissonText": "${PRODUCT_NAME} needs access to your Microphone"
-      }
+      ]
     ],
     "name": "app-plantas",
     "slug": "app-plantas",
@@ -20,6 +16,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "scheme": "app-plantas",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -29,16 +26,31 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "${PRODUCT_NAME} needs access to your Camera.",
+        "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone"
+      },
+      "bundleIdentifier": "com.hugopessoa.appplantas"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "package": "com.hugopessoa.appplantas"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "b68043bb-698d-4205-a751-57b50c14adac"
+      }
     }
   }
 }

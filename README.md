@@ -61,3 +61,5 @@ $ npx expo install expo-camera
 
 // React Native Vision Camera 
 $ expo install react-native-vision-camera
+
+$ npx expo install react-native-reanimated
