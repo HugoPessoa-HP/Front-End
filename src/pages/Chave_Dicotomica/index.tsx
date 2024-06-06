@@ -38,6 +38,7 @@ export default function CadastroDicotomicaOrigem(){
     const [ category, setCategory] = useState<CategoryProps | null>(null);
     const [ description, setDescription ] = useState();
     const [ loadingAuth, setLoadingAuth ] = useState(false);
+    const { pesquisador } = useContext(AuthContext);
     
     const [ class1, setClass1 ] = useState<ClassProps[] | []>([]);
     const [ classSelected_1, setClassSelected_1] = useState<ClassProps | undefined>();
@@ -213,20 +214,21 @@ export default function CadastroDicotomicaOrigem(){
     async function EnviarFormulario(){
         setLoadingAuth(true)
             try{
-        
                 const response = await api.post('/planta',{
                     categoria: category
                 })
-                console.log(response.data)
-                const { categoria } = response.data;
+                    console.log(response.data)
+                    const { categoria } = response.data;
     
-                const data = {
-                    ...response.data
-                };
+                    const data = {
+                       ...response.data
+                    };
+                    const token = pesquisador.token;
+                    api.defaults.headers.common['Authorization'] = `Bearer ${token}`
                 
                 setLoadingAuth(false);
             }catch(err){
-                console.log(" Erro ao Realizar Cadastro ");
+                console.log(" Erro ao Realizar Cadastro");
                 setLoadingAuth(false);
             }
         }

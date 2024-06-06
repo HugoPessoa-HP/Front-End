@@ -14,7 +14,7 @@ const { width: WIDTH , height: HEIGHT } = Dimensions.get('window');
 export function ModalClass({options, handleCloseModal, selectedItem}: ModalClassCategory){
 
     function onPressItem(item: ClassProps){     
-        console.log(item) 
+        console.log(item);
         selectedItem(item);
         handleCloseModal();
     }
@@ -35,7 +35,7 @@ export function ModalClass({options, handleCloseModal, selectedItem}: ModalClass
                 <ScrollView showsVerticalScrollIndicator={false}>
                     { options.map((item, index) => (
                         <TouchableOpacity key={index} style={styles.optionStyle} onPress={ () => onPressItem(item)}> 
-                            <Text style={styles.item}> 
+                            <Text style={styles.item}>
                                 {item.class} 
                             </Text>
                         </TouchableOpacity>

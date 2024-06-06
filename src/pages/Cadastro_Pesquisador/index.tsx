@@ -22,10 +22,11 @@ export default function CadastroPesquisador(){
     const [cpf, setCPF] = useState('');
 
     async function InserirDadosPesquisador(){
+        setLoadingAuth(true)
         if(email === '' || nome === '' || password === '' || cpf === ''){
             return;
         }
-        setLoadingAuth(true)
+
         try{
             const response = await api.post('/pesquisador',{
                 nome,
@@ -33,12 +34,17 @@ export default function CadastroPesquisador(){
                 cpf,
                 password
             })
+            console.log(response.data)
+            setCPF('')
+            setEmail('')
+            setNome('')
+            setSenha('')
         }catch(error){
             console.log(" Erro ao Realizar Cadastro ");
-            setLoadingAuth(true);
+            setLoadingAuth(false);
         }
-
-        setLoadingAuth(true);
+        
+        setLoadingAuth(false);
     }
 
     return(
@@ -75,7 +81,7 @@ export default function CadastroPesquisador(){
             />
 
             <TouchableOpacity style={styles.button} onPress={InserirDadosPesquisador}>
-                { loading ? (
+                { loadingAuth ? (
                     <ActivityIndicator size={40} color="#fff"/>
                 ) : (
                     <Text style={styles.buttonText}> Cadastrar Pesquisador </Text>

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { View, Text, Button, StyleSheet, TouchableOpacity , FlatList } from 'react-native'
+import { View, Text, Button, StyleSheet, TouchableOpacity , FlatList , Modal } from 'react-native'
 import { AuthContext } from '../../contexts/context'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
@@ -18,8 +18,9 @@ import { api } from '../../services/API';
 import { Marker } from 'react-native-maps';
 import { Float } from 'react-native/Libraries/Types/CodegenTypes';
 import { ScrollView } from 'react-native-gesture-handler';
+import { ModalClassPlants } from '../../Components/ModalPlants'
 
-type PlantasProps = {
+export type PlantasProps = {
     id: string;
     nome_Cientifico: string;
     familia: string;
@@ -27,6 +28,7 @@ type PlantasProps = {
     vernaculo2: string;
     origem: string;
     habito: string;
+    trilha_id: string;
     categoria: string;
 }
 
@@ -38,13 +40,21 @@ export default function Principal(){
     const { logout , estado } = useContext(AuthContext);
     const [location, setLocation] = useState<LocationObject | null>(null);
     const [ marker, setMarker] = useState([]);
-    const [ planta, setPlanta] = useState<PlantasProps[] | []>([]);
+    const [ plantas, setPlantas] = useState<PlantasProps[] | []>([]);
     const [ numeroPlantas, setNumeroPlantas] = useState<NumeroPlantasProps | []>();
     //const [ familias, setPlanta ] = useState();
     //var arrayFamilias = [];
     //var arrayHabitos = [];
     //var arrayOrigens = [];
 
+    useEffect(() => {
+        async function dadosPlants(){
+            const response = await api.get('/plantas')
+            setPlantas(response.data);
+            console.log(response.data);
+        }
+        dadosPlants();
+    }, [])
 
     async function mapa(){
         const { granted } = await requestForegroundPermissionsAsync();
@@ -62,6 +72,10 @@ export default function Principal(){
             console.log("Nova Localização", response);
             setLocation(response);
         });
+    }
+
+    function selectedItem(item: PlantasProps){
+        console.log(item)
     }
     /*
     const positionMarker = () => {
@@ -109,6 +123,14 @@ export default function Principal(){
     });
    }, []);
    */
+/*
+   <FlatList 
+        data={plantas}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => <ModalClassPlants{...item}/>}
+    >
+    </FlatList>
+*/
 
     return(
         <SafeAreaView style={styles.container}>
@@ -152,7 +174,8 @@ const styles = StyleSheet.create({
         marginBottom: 14,
         marginTop: 14,
         alignItems: 'flex-start',
-        paddingHorizontal: 12
+        paddingHorizontal: 12,
+        paddingVertical: 0
     },
     location: {
         backgroundColor: '#13a137',
@@ -204,7 +227,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#fff',
         justifyContent: 'flex-start',
-        paddingHorizontal: 8
+        paddingHorizontal: 0
     },
     list:{
 

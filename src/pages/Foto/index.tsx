@@ -5,7 +5,7 @@ import { Camera , useCameraDevice , useCameraPermission } from 'react-native-vis
 import { StatusBar } from "expo-status-bar";
 
 export default function Foto(){
-/*    const [facing, setFacing] = useState('back');
+    const [facing, setFacing] = useState('back');
     const { hasPermission , requestPermission } = useCameraPermission();
     const [ permission , setPermission ] = useState<null | boolean>(null);
 
@@ -56,7 +56,7 @@ export default function Foto(){
        </View>
     )
 
-*/
+
 }
 const styles = StyleSheet.create({
     container: {
