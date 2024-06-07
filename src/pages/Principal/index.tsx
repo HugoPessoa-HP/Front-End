@@ -1,24 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { View, Text, Button, StyleSheet, TouchableOpacity , FlatList , Modal } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { AuthContext } from '../../contexts/context'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import { Feather } from '@expo/vector-icons'
-import { useNavigation } from '@react-navigation/native';
 import { requestForegroundPermissionsAsync ,
          getCurrentPositionAsync , 
          LocationObject ,
          watchPositionAsync,
-         LocationAccuracy, 
-         watchHeadingAsync,} from 'expo-location';
+         LocationAccuracy} from 'expo-location';
 import * as location from 'expo-location';
-import MapView , {Polygon , Callout} from 'react-native-maps';
+import MapView from 'react-native-maps';
 
 import { api } from '../../services/API';
 import { Marker } from 'react-native-maps';
 import { Float } from 'react-native/Libraries/Types/CodegenTypes';
-import { ScrollView } from 'react-native-gesture-handler';
-import { ModalClassPlants } from '../../Components/ModalPlants'
 
 export type PlantasProps = {
     id: string;

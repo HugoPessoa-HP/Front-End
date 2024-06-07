@@ -1,5 +1,6 @@
+/*
 import { Button , StyleSheet , Text , View, SafeAreaView , TouchableOpacity} from "react-native";
-import React , { useState , useEffect} from 'react';
+import React , { useState } from 'react';
 import { CameraView , useCameraPermissions } from "expo-camera";
 
 export default function Foto(){
@@ -13,7 +14,7 @@ export default function Foto(){
         })
     }, [])
     */
-    
+    /*
     if (!permission) {
         // Camera permissions are still loading.
         return <View />;
@@ -67,3 +68,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     }
 })
+*/

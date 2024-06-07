@@ -6,7 +6,6 @@ import { Feather } from '@expo/vector-icons';
 import Principal from '../pages/Principal';
 import CadastroPlantas from '../pages/Cadastro_Planta';
 import CadastroDicotomicaOrigem from '../pages/Chave_Dicotomica';
-import TabRoutes from './onTab.routes';
 import CadastroPesquisador from '../pages/Cadastro_Pesquisador';
 
 //const Stack = createNativeStackNavigator();

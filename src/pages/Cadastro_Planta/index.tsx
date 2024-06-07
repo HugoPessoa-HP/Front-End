@@ -3,10 +3,8 @@ import { View,
          Text, 
          StyleSheet, 
          TextInput, 
-         Image, 
          TouchableOpacity,
-         ActivityIndicator, 
-         Button} from 'react-native'
+         ActivityIndicator} from 'react-native'
 
 import { AuthContext } from '../../contexts/context';
 

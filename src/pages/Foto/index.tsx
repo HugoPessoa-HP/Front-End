@@ -1,11 +1,10 @@
-import { Button , StyleSheet , Text , View, SafeAreaView , TouchableOpacity , Modal, BackHandler } from "react-native";
+import { StyleSheet , Text , View, SafeAreaView , TouchableOpacity} from "react-native";
 import React , { useState , useEffect , useRef } from 'react';
-import { CameraView , useCameraPermissions } from "expo-camera";
+
 import { Camera , useCameraDevice , useCameraPermission } from 'react-native-vision-camera';
 import { StatusBar } from "expo-status-bar";
 
 export default function Foto(){
-    const [facing, setFacing] = useState('back');
     const { hasPermission , requestPermission } = useCameraPermission();
     const [ permission , setPermission ] = useState<null | boolean>(null);
 

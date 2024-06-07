@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, ScrollView, FlatList} from 'react-native';
+import { View, Text, StyleSheet, Dimensions} from 'react-native';
 import { PlantasProps } from '../../pages/Principal';
 
 const { width: WIDTH , height: HEIGHT } = Dimensions.get('window');

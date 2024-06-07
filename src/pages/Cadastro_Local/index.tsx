@@ -1,3 +1,4 @@
+/*
 import { useState, useContext } from 'react';
 import { api } from '../../services/API';
 import { StyleSheet,
@@ -141,3 +142,4 @@ buttonText:{
     color: '#fff'
 }
 })
+*/

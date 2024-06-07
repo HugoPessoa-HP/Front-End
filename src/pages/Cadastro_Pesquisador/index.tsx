@@ -1,6 +1,5 @@
 import { useState, useContext } from 'react';
 import { StyleSheet,
-    Image,
     View,
     TextInput,
     Text,
@@ -13,7 +12,6 @@ import { api } from '../../services/API'
 
 export default function CadastroPesquisador(){
 
-    const { isAuthenticated , loading } = useContext(AuthContext);
     const [ loadingAuth, setLoadingAuth ] = useState(false);
 
     const [email, setEmail] = useState('');

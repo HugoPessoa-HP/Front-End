@@ -1,7 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Feather } from '@expo/vector-icons';
 
-import AppRoutes from "./onDrawer.routes";
 import Foto from '../pages/Foto';
 
 export type StackParamsFoto = {

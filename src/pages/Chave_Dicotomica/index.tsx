@@ -11,7 +11,6 @@ import { StyleSheet,
 
 import { ModalClass } from '../../Components/ModalClass'
 import { api } from '../../services/API';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { AuthContext } from '../../contexts/context';
 import { useNavigation } from '@react-navigation/native';
 

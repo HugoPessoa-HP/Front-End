@@ -1,10 +1,8 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../contexts/context";
-import { NavigationContainer } from "@react-navigation/native";
 
 import { View, ActivityIndicator } from "react-native";
 
-import AppRoutes from "./onDrawer.routes";
 import AuthRoutes from "./off.routes";
 import TabRoutes from "./onTab.routes";
 
