@@ -7,6 +7,7 @@ import Principal from '../pages/Principal';
 import CadastroPlantas from '../pages/Cadastro_Planta';
 import CadastroDicotomicaOrigem from '../pages/Chave_Dicotomica';
 import CadastroPesquisador from '../pages/Cadastro_Pesquisador';
+import Login from '../pages/login';
 
 //const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -14,6 +15,11 @@ const Drawer = createDrawerNavigator();
 function AppRoutes(){
     return(
         <Drawer.Navigator screenOptions={{ title: '' }}>
+            <Drawer.Screen name='Login' component={Login}
+            options={{
+                drawerLabel: 'Login'
+            }}
+            />
             <Drawer.Screen name='Home' component={Principal}
             options={{
                 drawerIcon: ({color, size}) => <Feather name='home' color={color} size={size}/>,

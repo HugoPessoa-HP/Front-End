@@ -22,11 +22,10 @@ function Routes(){
             }}>
                 <ActivityIndicator size={60} color={"#1D1D2E"}/>
             </View>
-
         )
     } else {
         return(
-            isAuthenticated ? <TabRoutes/> : <AuthRoutes/>
+            isAuthenticated ? <TabRoutes/> : <TabRoutes/>
         )
     }
 }
