@@ -338,7 +338,7 @@ inputContainer:{
     paddingHorizontal: 14
 },
 input:{
-    width: '100%',
+    width: '95%',
     height: 60,
     backgroundColor: '#f0f0f0',
     marginBottom: 12,
