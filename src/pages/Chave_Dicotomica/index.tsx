@@ -15,7 +15,7 @@ import { AuthContext } from '../../contexts/context';
 import { useNavigation } from '@react-navigation/native';
 
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackParamsFoto } from '../../routes/onStack.routes';
+//import { StackParamsFoto } from '../../routes/onStack.routes';
 //import { ViewCamera } from '../../Components/camera';
 export interface ClassProps{
     id: string;
@@ -33,7 +33,7 @@ interface CategoryProps{
 
 export default function CadastroDicotomicaOrigem(){
 
-    const navigation = useNavigation<NativeStackNavigationProp<StackParamsFoto>>();
+    //const navigation = useNavigation<NativeStackNavigationProp<StackParamsFoto>>();
     const [ category, setCategory] = useState<CategoryProps | null>(null);
     const [ description, setDescription ] = useState();
     const [ loadingAuth, setLoadingAuth ] = useState(false);
@@ -207,7 +207,7 @@ export default function CadastroDicotomicaOrigem(){
             console.log("Olá")
 
             // Navegar a próxima tela.
-            navigation.navigate('Foto');
+            //navigation.navigate('Foto');
     }
 
     async function EnviarFormulario(){

@@ -1,15 +1,5 @@
 {
   "expo": {
-    "plugins": [
-      [
-        "react-native-vision-camera",
-        {
-          "cameraPermissionText": "${PRODUCT_NAME} needs access to your Camera.",
-          "enableMicrophonePermission": true,
-          "microphonePermissonText": "${PRODUCT_NAME} needs access to your Microphone"
-        }
-      ]
-    ],
     "name": "app-plantas",
     "slug": "app-plantas",
     "version": "1.0.0",
@@ -25,23 +15,11 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true,
-      "infoPlist": {
-        "NSCameraUsageDescription": "${PRODUCT_NAME} needs access to your Camera.",
-        "NSMicrophoneUsageDescription": "Allow $(PRODUCT_NAME) to access your microphone"
-      },
-      "bundleIdentifier": "com.hugopessoa.appplantas"
-    },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "permissions": [
-        "android.permission.CAMERA",
-        "android.permission.RECORD_AUDIO"
-      ],
       "package": "com.hugopessoa.appplantas"
     },
     "web": {
