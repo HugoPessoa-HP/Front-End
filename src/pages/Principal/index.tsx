@@ -2,14 +2,12 @@ import React, { useContext, useEffect, useState } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { AuthContext } from '../../contexts/context'
 import { SafeAreaView } from 'react-native-safe-area-context'
-
 import { Feather } from '@expo/vector-icons'
-import { requestForegroundPermissionsAsync ,
-         getCurrentPositionAsync , 
+import { requestForegroundPermissionsAsync,
+         getCurrentPositionAsync ,
          LocationObject ,
          watchPositionAsync,
          LocationAccuracy} from 'expo-location';
-import * as location from 'expo-location';
 import MapView from 'react-native-maps';
 
 import { api } from '../../services/API';
@@ -33,16 +31,16 @@ type NumeroPlantasProps = {
 }
 
 export default function Principal(){
-    const { logout , estado } = useContext(AuthContext);
+    //const { logout , estado } = useContext(AuthContext);
     const [location, setLocation] = useState<LocationObject | null>(null);
-    const [ marker, setMarker] = useState([]);
-    const [ plantas, setPlantas] = useState<PlantasProps[] | []>([]);
-    const [ numeroPlantas, setNumeroPlantas] = useState<NumeroPlantasProps | []>();
+    //const [ marker, setMarker] = useState([]);
+    //const [ plantas, setPlantas] = useState<PlantasProps[] | []>([]);
+    //const [ numeroPlantas, setNumeroPlantas] = useState<NumeroPlantasProps | []>();
     //const [ familias, setPlanta ] = useState();
     //var arrayFamilias = [];
     //var arrayHabitos = [];
     //var arrayOrigens = [];
-
+/*
     useEffect(() => {
         async function dadosPlants(){
             const response = await api.get('/plantas')
@@ -51,7 +49,7 @@ export default function Principal(){
         }
         dadosPlants();
     }, [])
-
+*/
     async function mapa(){
         const { granted } = await requestForegroundPermissionsAsync();
 
