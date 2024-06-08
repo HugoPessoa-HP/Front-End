@@ -1,6 +1,15 @@
 {
   "expo": {
     "name": "app-plantas",
+    "plugins": [
+      [
+        "react-native-vision-camera",
+        {
+          "cameraPermissionText": "$(PRODUCT_NAME) needs access to your Camera.",
+          "enableMicrophonePermission": false
+        }
+      ]
+    ],
     "slug": "app-plantas",
     "version": "1.0.0",
     "orientation": "portrait",

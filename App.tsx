@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import 'react-native-reanimated'
+import 'react-native-reanimated';
 import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Routes from './src/routes/index';

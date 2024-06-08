@@ -1,4 +1,5 @@
-/*import React, { useState } from "react";
+/*
+import React, { useState } from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View , SafeAreaView} from 'react-native';
 
 export default function ViewCamera(){

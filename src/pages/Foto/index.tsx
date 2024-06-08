@@ -1,8 +1,7 @@
-/*
 import { StyleSheet , Text , View, SafeAreaView , TouchableOpacity} from "react-native";
 import React , { useState , useEffect , useRef } from 'react';
 
-import { Camera , useCameraDevice , useCameraPermission } from 'react-native-vision-camera';
+import { Camera , useCameraDevice ,CameraPosition , useCameraPermission } from 'react-native-vision-camera';
 import { StatusBar } from "expo-status-bar";
 
 export default function Foto(){
@@ -46,7 +45,6 @@ export default function Foto(){
         device={device}
         ref={cameraRef} 
         isActive={true} 
-        orientation="portrait"
         resizeMode="cover"
         />
 
@@ -89,4 +87,3 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     }
 })
-    */

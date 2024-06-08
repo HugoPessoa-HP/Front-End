@@ -1,4 +1,3 @@
-/*
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Foto from '../pages/Foto';
@@ -19,4 +18,3 @@ function StackRoutes(){
 }
 
 export default StackRoutes;
-*/
