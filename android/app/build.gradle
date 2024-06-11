@@ -100,12 +100,12 @@ android {
                 keyPassword MYAPP_UPLOAD_KEY_PASSWORD
             }
         }
-        //debug {
-        //    storeFile file('debug.keystore')
-        //    storePassword 'android'
-        //    keyAlias 'androiddebugkey'
-        //    keyPassword 'android'
-        //}
+        debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
     }
     buildTypes {
         debug {
@@ -127,7 +127,6 @@ android {
         }
     }
 }
-
 // Apply static values from `gradle.properties` to the `android.packagingOptions`
 // Accepts values in comma delimited lists, example:
 // android.packagingOptions.pickFirsts=/LICENSE,**/picasa.ini
