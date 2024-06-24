@@ -1,3 +1,4 @@
+/*
 import { StyleSheet , Text , View, SafeAreaView , TouchableOpacity} from "react-native";
 import React , { useState , useEffect , useRef } from 'react';
 
@@ -87,3 +88,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     }
 })
+*/

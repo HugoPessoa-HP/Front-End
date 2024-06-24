@@ -2,18 +2,19 @@ import React from 'react';
 
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, ScrollView} from 'react-native';
 import { ClassProps } from '../../pages/Chave_Dicotomica';
+import { LocalProps, PlantaProps, TrilhaProps } from '../../pages/Classificacao';
  
-interface ModalClassCategory {
-    options: ClassProps[];
+interface ModalLocalCategory {
+    options: LocalProps[];
     handleCloseModal: () => void;
-    selectedItem: (item: ClassProps) => void;
+    selectedItem: (item: LocalProps) => void;
 }
 
 const { width: WIDTH , height: HEIGHT } = Dimensions.get('window');
 
-export function ModalClass({options, handleCloseModal, selectedItem}: ModalClassCategory){
+export function ModalClassLocal({options, handleCloseModal, selectedItem}: ModalLocalCategory){
 
-    function onPressItem(item: ClassProps){     
+    function onPressItem(item: LocalProps){     
         console.log(item);
         selectedItem(item);
         handleCloseModal();
@@ -36,7 +37,7 @@ export function ModalClass({options, handleCloseModal, selectedItem}: ModalClass
                     { options.map((item, index) => (
                         <TouchableOpacity key={index} style={styles.optionStyle} onPress={ () => onPressItem(item)}> 
                             <Text style={styles.item}>
-                                {item.class} 
+                                {item.name_Local} 
                             </Text>
                         </TouchableOpacity>
                     )) }

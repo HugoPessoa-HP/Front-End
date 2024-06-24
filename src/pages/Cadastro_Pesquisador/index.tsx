@@ -8,7 +8,7 @@ import { StyleSheet,
  } from 'react-native';
 
 import { AuthContext } from '../../contexts/context';
-import { api } from '../../services/API'
+import { api } from '../../services/API';
 
 export default function CadastroPesquisador(){
 

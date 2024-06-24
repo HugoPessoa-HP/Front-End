@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from '@expo/vector-icons';
 
 import AppRoutes from "./onDrawer.routes";
-import Foto from "../pages/Foto";
+//import Foto from "../pages/Foto";
 //import StackRoutes from "./onStack.routes";
 
 const Tab = createBottomTabNavigator();
@@ -15,14 +15,6 @@ function TabRoutes(){
                 tabBarIcon: ({ color , size }) => <Feather name="home" color='#13a137' size={28}/>,
                 tabBarLabel: 'Home'
              }}
-             />
-             <Tab.Screen name="Foto" component={Foto}
-             options={{
-                tabBarIcon: ({ color , size }) => <Feather name="camera" color='#13a137' size={28}/>,
-                tabBarLabel: 'Foto'
-                    
-             }}
-             
              />
         </Tab.Navigator>
     )

@@ -9,7 +9,7 @@ import { StyleSheet,
     Modal
 } from 'react-native';
 
-import { ModalClass } from '../../Components/ModalClass'
+import { ModalClass } from '../../Components/ModalTrail'
 import { api } from '../../services/API';
 import { AuthContext } from '../../contexts/context';
 import { useNavigation } from '@react-navigation/native';
@@ -233,7 +233,8 @@ export default function CadastroDicotomicaOrigem(){
         }
 
     return(
-        
+        <Text> Teste </Text>
+        /*
         <View style={styles.container}>
             <Text style={ styles.text }> Chave Dicotômica </Text>
             {
@@ -308,8 +309,9 @@ export default function CadastroDicotomicaOrigem(){
             <TouchableOpacity style={styles.button} onPress={TirarFoto}>
                 <Text style={styles.buttonText} > Tirar Foto </Text>
             </TouchableOpacity>
-
+            
         </View>
+        */
     )
 }
 
