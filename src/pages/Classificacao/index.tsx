@@ -6,7 +6,8 @@ import { StyleSheet,
     Text,
     TouchableOpacity,
     ActivityIndicator,
-    Modal
+    Modal,
+    ScrollView
 } from 'react-native';
 
 import { ModalClassLocal } from '../../Components/ModalLocal';
@@ -177,7 +178,7 @@ export default function Cadastro(){
         }
 
     return(
-        
+        <ScrollView>
         <View style={styles.container}>
             <Text style={ styles.text }> Adicionar </Text>
             {
@@ -202,7 +203,7 @@ export default function Cadastro(){
             </Modal>
             {
             <View style={styles.actions}>
-            <TouchableOpacity style={styles.buttonSelect} onPress={ () => setModalTrilha(true) }>
+            <TouchableOpacity style={styles.input} onPress={ () => setModalTrilha(true) }>
                 <Text style={{ color: '#050505'}}> {trilhaSelected?.name_trail} </Text>
             </TouchableOpacity>
 
@@ -255,13 +256,36 @@ export default function Cadastro(){
 
                 <TextInput
                 placeholder='Longitude'
-                style={styles.input}
+                style={styles.inputContainer}
                 placeholderTextColor="#050505"
                 value={latitude}
                 onChangeText={setLatitude}
                 />
             </View>
+            <TouchableOpacity style={[styles.buttonSelect, {}]} onPress={Salvar}>
+                { loadingAuth ? (
+                    <ActivityIndicator size={40} color="#fff"/>
+                ) : (
+                    <View style={styles.actionsPlus}>
+                        <Text style={styles.buttonText}>+</Text>
+                        <Text style={styles.buttonText} > Adicionar </Text>
+                    </View>
+                )}
+            </TouchableOpacity>
 
+            <Text style={styles.textClass}> Classificação </Text>
+            <Text style={styles.textNormal}>  Nativas  </Text>
+            <Text style={styles.textNormal}>      * Não Requer Manejo  </Text>
+            <Text style={styles.textNormal}>    </Text>
+            <Text style={styles.textNormal}>  Nativas Dominantes  </Text>
+            <Text style={styles.textNormal}>      * Controle de superpopulação no interior de</Text>
+            <Text style={styles.textNormal}>      áreas legalmente protegidas (baixa </Text>
+            <Text style={styles.textNormal}>      prioridade)  </Text>
+            <Text style={styles.textNormal}>      * Controle populacional em áreas sob </Text>
+            <Text style={styles.textNormal}>      restauração ecológica (baixa prioridade)  </Text>
+            <Text style={styles.textNormal}>  Alienígenas ocasionais  </Text>
+            <Text style={styles.textNormal}>      * Erradicação de áreas legalmente protegidas (baixa prioridade)  </Text>
+            
             <TouchableOpacity style={styles.button} onPress={Salvar}>
                 { loadingAuth ? (
                     <ActivityIndicator size={40} color="#fff"/>
@@ -274,6 +298,7 @@ export default function Cadastro(){
             </TouchableOpacity>
 
         </View>
+        </ScrollView>
     )
 }
 
@@ -293,8 +318,16 @@ text:{
     alignItems: 'flex-start',
     justifyContent: 'flex-start'
 },
+textNormal: {
+    fontSize: 16
+},
 textOccurrence:{
     fontSize: 24
+},
+textClass:{
+    fontSize: 24,
+    color: '#fa5f5f',
+    fontWeight: 'bold',
 },
 logo:{
     marginBottom: 18
@@ -310,7 +343,14 @@ input:{
     paddingHorizontal: 8,
 },
 inputContainer:{
-    width: '50%',
+    width: '45%',
+    height: 44,
+    backgroundColor: '#f0f0f0',
+    marginBottom: 12,
+    borderRadius: 4,
+    color: '#050505',
+    justifyContent: 'center',
+    paddingHorizontal: 8,
 },
 button:{
     width: '100%',
@@ -343,13 +383,17 @@ actions:{
     justifyContent: 'space-between'
 },
 buttonSelect:{
-    width: '80%',
-    height: 44,
-    backgroundColor: '#f0f0f0',
-    marginBottom: 12,
+    width: '100%',
+    height: 40,
+    backgroundColor: '#5f5f5f',
     borderRadius: 4,
-    color: '#050505',
     justifyContent: 'center',
-    paddingHorizontal: 8,
+    alignItems: 'center',
+    marginVertical: 10
+},
+actionsPlus:{
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'center'
 }
 })

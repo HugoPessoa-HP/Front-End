@@ -96,15 +96,17 @@ const styles = StyleSheet.create({
 container:{
     flex: 1,
     justifyContent: 'flex-start',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     backgroundColor: '#fff',
     paddingEnd: '4%',
     paddingStart: '4%'
 },
 text:{
-    fontSize: 20,
+    fontSize: 28,
     fontWeight: 'bold',
     marginVertical: 20,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start'
 },
 logo:{
     marginBottom: 18
@@ -117,8 +119,8 @@ inputContainer:{
     paddingHorizontal: 14
 },
 input:{
-    width: '95%',
-    height: 40,
+    width: '100%',
+    height: 44,
     backgroundColor: '#f0f0f0',
     marginBottom: 12,
     borderRadius: 4,
@@ -126,7 +128,7 @@ input:{
     color: '#050505',
 },
 button:{
-    width: '95%',
+    width: '100%',
     height: 40,
     backgroundColor: '#13a137',
     borderRadius: 4,

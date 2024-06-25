@@ -74,14 +74,14 @@ const styles = StyleSheet.create({
         marginBottom: 18
     },
     inputContainer:{
-        width: '95%',
+        width: '100%',
         alignItems: 'center',
         justifyContent: 'center',
         paddingVertical: 32,
         paddingHorizontal: 14
     },
     input:{
-        width: '95%',
+        width: '100%',
         height: 50,
         backgroundColor: '#f0f0f0',
         marginBottom: 12,
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         color: '#050505'
     },
     button:{
-        width: '95%',
+        width: '100%',
         height: 40,
         backgroundColor: '#050505',
         borderRadius: 4,
