@@ -12,7 +12,7 @@ interface ModalClassCategory {
 
 const { width: WIDTH , height: HEIGHT } = Dimensions.get('window');
 
-export function ModalClass({options, handleCloseModal, selectedItem}: ModalClassCategory){
+export function ModalClassTrail({options, handleCloseModal, selectedItem}: ModalClassCategory){
 
     function onPressItem(item: TrilhaProps){     
         console.log(item);

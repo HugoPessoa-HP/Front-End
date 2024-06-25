@@ -9,7 +9,7 @@ import { StyleSheet,
     Modal
 } from 'react-native';
 
-import { ModalClass } from '../../Components/ModalTrail'
+import { ModalClassTrail } from '../../Components/ModalTrail'
 import { api } from '../../services/API';
 import { AuthContext } from '../../contexts/context';
 import { useNavigation } from '@react-navigation/native';

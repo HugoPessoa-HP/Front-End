@@ -11,7 +11,7 @@ import { StyleSheet,
 } from 'react-native';
 
 import { ModalClassLocal } from '../../Components/ModalLocal';
-import { ModalClass } from '../../Components/ModalTrail';
+import { ModalClassTrail } from '../../Components/ModalTrail';
 import { api } from '../../services/API';
 import { AuthContext } from '../../contexts/context';
 import { useNavigation } from '@react-navigation/native';
@@ -57,6 +57,8 @@ export default function Cadastro(){
     const [ description, setDescription ] = useState();
     const [ loadingAuth, setLoadingAuth ] = useState(false);
     const { pesquisador } = useContext(AuthContext);
+
+    const [ modalClass, setModalClass ] = useState(false);
 
     const [ trilha, setTrilha ] = useState<TrilhaProps[] | []>([]);
     const [ trilhaSelected, setTrilhaSelected] = useState<TrilhaProps | undefined>();
@@ -222,7 +224,7 @@ export default function Cadastro(){
             <Modal transparent={true}
             visible={modalTrilha}
             animationType="fade">
-                <ModalClass 
+                <ModalClassTrail
                             options={trilha}
                             handleCloseModal={ () => setModalTrilha(false) }
                             selectedItem={ classTrilha }
@@ -293,13 +295,13 @@ export default function Cadastro(){
                     <View style={styles.inputText}>
                     <Text> Espécies nativas (inclui cosmopolitas) </Text>
                     </View>
-                    <TouchableOpacity style={styles.inputSelection}>
+                    <TouchableOpacity style={styles.inputSelection} onPress={ () => setModalClass(true) }>
                         <Feather name='chevrons-right' size={28} color="#fff"/>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.class}>
                     <View style={styles.inputNumber}>
-                        <Text style={{color: '#fff'}}> 1A </Text>
+                        <Text style={{color: '#fff'}}> 1B </Text>
                     </View>
                     <View style={styles.inputText}>
                         <Text> Espécies nativas (inclui cosmopolitas) </Text>
@@ -309,6 +311,8 @@ export default function Cadastro(){
                     </TouchableOpacity>
                 </View>
             </View>
+
+
             <TouchableOpacity style={styles.button} onPress={Salvar}>
                 { loadingAuth ? (
                     <ActivityIndicator size={40} color="#fff"/>
