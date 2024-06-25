@@ -352,8 +352,7 @@ input:{
 button:{
     width: '95%',
     height: 40,
-    backgroundColor: '#13a137',
-    borderRadius: 4,
+    backgroundColor: '#429e59',
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 10

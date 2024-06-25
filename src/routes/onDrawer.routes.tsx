@@ -37,11 +37,6 @@ function AppRoutes(){
                 drawerLabel: 'Classificação'
             }}
             />
-            <Drawer.Screen name='Login' component={Login}
-            options={{
-                drawerLabel: 'Login'
-            }}
-            />
         </Drawer.Navigator>
     )
 }

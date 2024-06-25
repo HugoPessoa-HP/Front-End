@@ -11,7 +11,7 @@ const Tab = createBottomTabNavigator();
 function TabRoutes(){
     return(
         <Tab.Navigator screenOptions={{ headerShown: false }}>
-            <Tab.Screen name="Menu" component={AppRoutes}
+            <Tab.Screen name="Home" component={AppRoutes}
             options={{
                 tabBarIcon: ({ color , size }) => <Feather name="home" color='##5f5f5f' size={28}/>,
                 tabBarLabel: 'Home'

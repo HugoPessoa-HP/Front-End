@@ -17,6 +17,7 @@ import { AuthContext } from '../../contexts/context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ModalClassPlant } from '../../Components/ModalPlant';
+import { Feather } from '@expo/vector-icons'
 //import { StackParamsFoto } from '../../routes/onStack.routes';
 //import { ViewCamera } from '../../Components/camera';
 
@@ -183,8 +184,11 @@ export default function Cadastro(){
             <Text style={ styles.text }> Adicionar </Text>
             {
             <View style={ styles.actions }>
-            <TouchableOpacity style={styles.input} onPress={ () => setLocalVisible(true)}>
-                <Text style={{ color: '#050505'}} > {localSelected?.name_Local} </Text>
+            <TouchableOpacity style={[styles.input]} onPress={ () => setLocalVisible(true)}>
+                <View style={ styles.inputActions }>  
+                    <Text style={{ color: '#050505'}} > {localSelected?.name_Local} </Text>
+                    <Feather name='chevron-down' size={28} color="#050505"/>
+                </View>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.buttonAdd}>
@@ -204,7 +208,10 @@ export default function Cadastro(){
             {
             <View style={styles.actions}>
             <TouchableOpacity style={styles.input} onPress={ () => setModalTrilha(true) }>
-                <Text style={{ color: '#050505'}}> {trilhaSelected?.name_trail} </Text>
+                <View style={ styles.inputActions }> 
+                    <Text style={{ color: '#050505'}}> {trilhaSelected?.name_trail} </Text>
+                    <Feather name='chevron-down' size={28} color="#050505"/>
+                </View>
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.buttonAdd}>
@@ -223,13 +230,16 @@ export default function Cadastro(){
             </Modal>
             {
             <View style={styles.actions}>
-            <TouchableOpacity style={styles.input} onPress={ () => setPlantaVisible(true) }>
-                <Text style={{ color: '#050505'}}> { plantaSelected?.name_Scientific } </Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.input} onPress={ () => setPlantaVisible(true) }>
+                    <View style={ styles.inputActions }>
+                        <Text style={{ color: '#050505'}}> { plantaSelected?.name_Scientific } </Text>
+                        <Feather name='chevron-down' size={28} color="#050505"/>
+                    </View>
+                </TouchableOpacity>
 
-            <TouchableOpacity style={styles.buttonAdd}>
-                <Text style={styles.buttonText}> + </Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonAdd}>
+                    <Text style={styles.buttonText}> + </Text>
+                </TouchableOpacity>
             </View>
             }
             <Modal transparent={true}
@@ -267,30 +277,43 @@ export default function Cadastro(){
                     <ActivityIndicator size={40} color="#fff"/>
                 ) : (
                     <View style={styles.actionsPlus}>
-                        <Text style={styles.buttonText}>+</Text>
+                        <Text style={styles.buttonText}> + </Text>
                         <Text style={styles.buttonText} > Adicionar </Text>
                     </View>
                 )}
             </TouchableOpacity>
-
-            <Text style={styles.textClass}> Classificação </Text>
-            <Text style={styles.textNormal}>  Nativas  </Text>
-            <Text style={styles.textNormal}>      * Não Requer Manejo  </Text>
-            <Text style={styles.textNormal}>    </Text>
-            <Text style={styles.textNormal}>  Nativas Dominantes  </Text>
-            <Text style={styles.textNormal}>      * Controle de superpopulação no interior de</Text>
-            <Text style={styles.textNormal}>      áreas legalmente protegidas (baixa </Text>
-            <Text style={styles.textNormal}>      prioridade)  </Text>
-            <Text style={styles.textNormal}>      * Controle populacional em áreas sob </Text>
-            <Text style={styles.textNormal}>      restauração ecológica (baixa prioridade)  </Text>
-            <Text style={styles.textNormal}>  Alienígenas ocasionais  </Text>
-            <Text style={styles.textNormal}>      * Erradicação de áreas legalmente protegidas (baixa prioridade)  </Text>
             
+            <Text style={styles.textClass}> Classificação </Text>
+
+            <View style={styles.classUP}>
+                <View style={styles.class}>
+                    <View style={styles.inputNumber}>
+                        <Text style={{color: '#fff'}}> 1A </Text>
+                    </View>
+                    <View style={styles.inputText}>
+                    <Text> Espécies nativas (inclui cosmopolitas) </Text>
+                    </View>
+                    <TouchableOpacity style={styles.inputSelection}>
+                        <Feather name='chevrons-right' size={28} color="#fff"/>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.class}>
+                    <View style={styles.inputNumber}>
+                        <Text style={{color: '#fff'}}> 1A </Text>
+                    </View>
+                    <View style={styles.inputText}>
+                        <Text> Espécies nativas (inclui cosmopolitas) </Text>
+                    </View>
+                    <TouchableOpacity style={styles.inputSelection}>
+                        <Feather name='chevrons-right' size={28} color="#fff"/>
+                    </TouchableOpacity>
+                </View>
+            </View>
             <TouchableOpacity style={styles.button} onPress={Salvar}>
                 { loadingAuth ? (
                     <ActivityIndicator size={40} color="#fff"/>
                 ) : (
-                    <Text style={styles.buttonText} > Salvar </Text>
+                    <Text style={styles.buttonText}> Salvar </Text>
                 )}
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} onPress={TirarFoto}>
@@ -324,10 +347,32 @@ textNormal: {
 textOccurrence:{
     fontSize: 24
 },
+classUP:{
+    justifyContent: 'space-evenly',
+    marginTop: 14,
+    marginBottom: 24
+},
 textClass:{
     fontSize: 24,
     color: '#fa5f5f',
     fontWeight: 'bold',
+},
+inputText:{
+    width: '80%',
+    height: 100,
+    backgroundColor: '#f0f0f0',
+    borderBottomColor: '#050505',
+    borderRadius: 4,
+    justifyContent: 'center',
+    alignItems: 'center'
+},
+inputSelection:{
+    width: '7%',
+    height: 100,
+    backgroundColor: '#429e59',
+    borderRadius: 4,
+    justifyContent: 'center',
+    alignItems: 'flex-start'
 },
 logo:{
     marginBottom: 18
@@ -339,23 +384,38 @@ input:{
     marginBottom: 12,
     borderRadius: 4,
     color: '#050505',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     paddingHorizontal: 8,
 },
 inputContainer:{
     width: '45%',
     height: 44,
     backgroundColor: '#f0f0f0',
-    marginBottom: 12,
+    marginBottom: 8,
     borderRadius: 4,
     color: '#050505',
     justifyContent: 'center',
     paddingHorizontal: 8,
 },
+inputActions:{
+    paddingVertical: 8,
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+},
+inputNumber:{
+    width: '13%',
+    height: 100,
+    backgroundColor: '#5f5f5f',
+    borderRadius: 4,
+    justifyContent: 'center',
+    alignItems: 'center'
+},
 button:{
     width: '100%',
     height: 40,
-    backgroundColor: '#13a137',
+    backgroundColor: '#429e59',
     borderRadius: 4,
     justifyContent: 'center',
     alignItems: 'center',
@@ -380,7 +440,7 @@ buttonAdd:{
 actions:{
     flexDirection: 'row',
     width: '100%',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
 },
 buttonSelect:{
     width: '100%',
@@ -395,5 +455,11 @@ actionsPlus:{
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'center'
+},
+class:{
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between',
+    alignContent: 'center'
 }
 })
