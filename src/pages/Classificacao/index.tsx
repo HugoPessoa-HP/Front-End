@@ -9,12 +9,11 @@ import { StyleSheet,
     Modal
 } from 'react-native';
 
-import { ModalClassLocal } from '../../Components/ModalLocal'
-import { ModalClass } from '../../Components/ModalTrail'
+import { ModalClassLocal } from '../../Components/ModalLocal';
+import { ModalClass } from '../../Components/ModalTrail';
 import { api } from '../../services/API';
 import { AuthContext } from '../../contexts/context';
 import { useNavigation } from '@react-navigation/native';
-
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ModalClassPlant } from '../../Components/ModalPlant';
 //import { StackParamsFoto } from '../../routes/onStack.routes';
@@ -50,11 +49,13 @@ interface CategoryProps{
 export default function Cadastro(){
 
     //const navigation = useNavigation<NativeStackNavigationProp<StackParamsFoto>>();
+    const [ latitude, setLatitude ] = useState('');
+    const [ longitude, setLongitude ] = useState();
     const [ category, setCategory] = useState<CategoryProps | null>(null);
     const [ description, setDescription ] = useState();
     const [ loadingAuth, setLoadingAuth ] = useState(false);
     const { pesquisador } = useContext(AuthContext);
-    
+
     const [ trilha, setTrilha ] = useState<TrilhaProps[] | []>([]);
     const [ trilhaSelected, setTrilhaSelected] = useState<TrilhaProps | undefined>();
     const [ modalTrilha, setModalTrilha ] = useState(false);
@@ -93,8 +94,8 @@ export default function Cadastro(){
             setTrilha(trailClass1);
             setTrilhaSelected(trailClass1[0]);
             //const response = await api.get('/pesquisadores');
-            //console.log(response.data)
-            //await setUser(response.data)
+            //console.log(response.data);
+            //await setUser(response.data);
         }
 
         loadInfo();
@@ -105,7 +106,7 @@ export default function Cadastro(){
             const itemPlanta = [{ id: '1' , vernacular1: '', vernacular2: '', vernacular3: '', name_Scientific: 'Nome Científico 1'},
                                 { id: '2' , vernacular1: '', vernacular2: '', vernacular3: '', name_Scientific: 'Nome Científico 2'}]
             setPlanta(itemPlanta);
-            setSelectedPlanta(itemPlanta[0])
+            setSelectedPlanta(itemPlanta[0]);
         }
         loadInfo();
     }, [trilhaSelected])
@@ -180,9 +181,15 @@ export default function Cadastro(){
         <View style={styles.container}>
             <Text style={ styles.text }> Adicionar </Text>
             {
-            <TouchableOpacity style={styles.input} onPress={ () => setLocalVisible(true) }>
-                <Text style={{ color: '#050505'}}> {localSelected?.name_Local} </Text>
+            <View style={ styles.actions }>
+            <TouchableOpacity style={styles.input} onPress={ () => setLocalVisible(true)}>
+                <Text style={{ color: '#050505'}} > {localSelected?.name_Local} </Text>
             </TouchableOpacity>
+
+            <TouchableOpacity style={styles.buttonAdd}>
+                <Text style={styles.buttonText}> + </Text>
+            </TouchableOpacity>
+            </View>
             }
             <Modal transparent={true}
             visible={localVisible}
@@ -194,9 +201,15 @@ export default function Cadastro(){
                 />
             </Modal>
             {
-            <TouchableOpacity style={styles.input} onPress={ () => setModalTrilha(true) }>
+            <View style={styles.actions}>
+            <TouchableOpacity style={styles.buttonSelect} onPress={ () => setModalTrilha(true) }>
                 <Text style={{ color: '#050505'}}> {trilhaSelected?.name_trail} </Text>
             </TouchableOpacity>
+
+            <TouchableOpacity style={styles.buttonAdd}>
+                <Text style={styles.buttonText}> + </Text>
+            </TouchableOpacity>
+            </View>
             }
             <Modal transparent={true}
             visible={modalTrilha}
@@ -208,9 +221,15 @@ export default function Cadastro(){
                 />
             </Modal>
             {
+            <View style={styles.actions}>
             <TouchableOpacity style={styles.input} onPress={ () => setPlantaVisible(true) }>
                 <Text style={{ color: '#050505'}}> { plantaSelected?.name_Scientific } </Text>
             </TouchableOpacity>
+
+            <TouchableOpacity style={styles.buttonAdd}>
+                <Text style={styles.buttonText}> + </Text>
+            </TouchableOpacity>
+            </View>
             }
             <Modal transparent={true}
             visible={plantaVisible}
@@ -222,8 +241,26 @@ export default function Cadastro(){
                 />
             </Modal>
 
-            <Text>Espécie Detectada:</Text>
+            <Text style={styles.textOccurrence} > Ocorrências </Text>
             <Text style={styles.categoria}> {category?.categoria} </Text>
+
+            <View style={styles.actions}>
+                <TextInput
+                placeholder='Latitude'
+                style={styles.inputContainer}
+                placeholderTextColor="#050505"
+                value={latitude}
+                onChangeText={setLatitude}
+                />
+
+                <TextInput
+                placeholder='Longitude'
+                style={styles.input}
+                placeholderTextColor="#050505"
+                value={latitude}
+                onChangeText={setLatitude}
+                />
+            </View>
 
             <TouchableOpacity style={styles.button} onPress={Salvar}>
                 { loadingAuth ? (
@@ -244,7 +281,7 @@ const styles = StyleSheet.create({
 container:{
     flex: 1,
     justifyContent: 'flex-start',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     backgroundColor: '#fff',
     paddingEnd: '4%',
     paddingStart: '4%'
@@ -256,11 +293,14 @@ text:{
     alignItems: 'flex-start',
     justifyContent: 'flex-start'
 },
+textOccurrence:{
+    fontSize: 24
+},
 logo:{
     marginBottom: 18
 },
 input:{
-    width: '95%',
+    width: '80%',
     height: 44,
     backgroundColor: '#f0f0f0',
     marginBottom: 12,
@@ -269,8 +309,11 @@ input:{
     justifyContent: 'center',
     paddingHorizontal: 8,
 },
+inputContainer:{
+    width: '50%',
+},
 button:{
-    width: '95%',
+    width: '100%',
     height: 40,
     backgroundColor: '#13a137',
     borderRadius: 4,
@@ -286,4 +329,27 @@ buttonText:{
 categoria:{
     fontStyle: 'italic',
 },
+buttonAdd:{
+    width: '15%',
+    backgroundColor: '#5f5f5f',
+    borderRadius: 4,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center'
+},
+actions:{
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between'
+},
+buttonSelect:{
+    width: '80%',
+    height: 44,
+    backgroundColor: '#f0f0f0',
+    marginBottom: 12,
+    borderRadius: 4,
+    color: '#050505',
+    justifyContent: 'center',
+    paddingHorizontal: 8,
+}
 })

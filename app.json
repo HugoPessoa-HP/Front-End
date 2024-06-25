@@ -1,7 +1,6 @@
 {
   "expo": {
     "name": "app-plantas",
-    
     "slug": "app-plantas",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -30,6 +29,9 @@
       "eas": {
         "projectId": "b68043bb-698d-4205-a751-57b50c14adac"
       }
+    },
+    "ios": {
+      "bundleIdentifier": "com.hugopessoa.appplantas"
     }
   }
 }
