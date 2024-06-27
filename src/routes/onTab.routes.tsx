@@ -2,8 +2,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from '@expo/vector-icons';
 
 import AppRoutes from "./onDrawer.routes";
-//import Foto from "../pages/Foto";
-//import StackRoutes from "./onStack.routes";
 import Login from "../pages/login";
 
 const Tab = createBottomTabNavigator();

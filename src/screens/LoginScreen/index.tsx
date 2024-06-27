@@ -30,7 +30,7 @@ export default function Login(){
         <View style={styles.container}>
             <Image
                 style={styles.logo}
-                source={require('../../images/Plantas-Exoticas.png')}
+                source={require('../../assets/Plantas-Exoticas.png')}
             />
 
             <View style={styles.inputContainer}>
