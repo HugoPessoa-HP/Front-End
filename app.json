@@ -32,6 +32,9 @@
     },
     "ios": {
       "bundleIdentifier": "com.hugopessoa.appplantas"
-    }
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
