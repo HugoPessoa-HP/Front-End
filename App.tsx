@@ -17,10 +17,10 @@ const Stack = createStackNavigator();
 function LocaisStack() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Locais" component={LocaisScreen} options={{ title: 'Locais' }} />
-      <Stack.Screen name="Local" component={LocalScreen} />
-      <Stack.Screen name="Trilha" component={TrilhaScreen} />
-      <Stack.Screen name="Planta" component={PlantaScreen} />
+      <Stack.Screen name="Locais" component={LocaisScreen} options={{ title: 'Locais' }}/>
+      <Stack.Screen name="Local" component={LocalScreen}/>
+      <Stack.Screen name="Trilha" component={TrilhaScreen}/>
+      <Stack.Screen name="Planta" component={PlantaScreen}/>
     </Stack.Navigator>
   );
 }

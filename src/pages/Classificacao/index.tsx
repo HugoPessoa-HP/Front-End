@@ -113,7 +113,9 @@ export default function Cadastro(){
             setSelectedPlanta(itemPlanta[0]);
         }
         loadInfo();
-    }, [trilhaSelected])
+    }, [trilhaSelected]);
+
+    
 
     async function uploadImage(){
 
@@ -366,7 +368,7 @@ inputText:{
     height: 100,
     backgroundColor: '#f0f0f0',
     borderBottomColor: '#050505',
-    borderRadius: 4,
+    borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center'
 },
@@ -374,7 +376,7 @@ inputSelection:{
     width: '7%',
     height: 100,
     backgroundColor: '#429e59',
-    borderRadius: 4,
+    borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'flex-start'
 },
@@ -386,7 +388,7 @@ input:{
     height: 44,
     backgroundColor: '#f0f0f0',
     marginBottom: 12,
-    borderRadius: 4,
+    borderRadius: 8,
     color: '#050505',
     justifyContent: 'space-between',
     paddingHorizontal: 8,
@@ -396,7 +398,7 @@ inputContainer:{
     height: 44,
     backgroundColor: '#f0f0f0',
     marginBottom: 8,
-    borderRadius: 4,
+    borderRadius: 8,
     color: '#050505',
     justifyContent: 'center',
     paddingHorizontal: 8,
@@ -412,7 +414,7 @@ inputNumber:{
     width: '13%',
     height: 100,
     backgroundColor: '#5f5f5f',
-    borderRadius: 4,
+    borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center'
 },
@@ -420,7 +422,7 @@ button:{
     width: '100%',
     height: 40,
     backgroundColor: '#429e59',
-    borderRadius: 4,
+    borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 10
@@ -436,7 +438,7 @@ categoria:{
 buttonAdd:{
     width: '15%',
     backgroundColor: '#5f5f5f',
-    borderRadius: 4,
+    borderRadius: 8,
     height: 40,
     justifyContent: 'center',
     alignItems: 'center'
@@ -450,7 +452,7 @@ buttonSelect:{
     width: '100%',
     height: 40,
     backgroundColor: '#5f5f5f',
-    borderRadius: 4,
+    borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 10

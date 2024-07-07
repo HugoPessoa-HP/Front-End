@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "app-plantas",
-    "slug": "app-plantas",
-    "version": "1.0.0",
+    "name": "plants-app",
+    "slug": "plants-app",
+    "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -27,7 +27,10 @@
     },
     "extra": {
       "eas": {
-        "projectId": "b68043bb-698d-4205-a751-57b50c14adac"
+        "projectId": "96d6f69a-407b-449f-a185-8bdc5564b04c"
+      },
+      "router": {
+        "origin": false
       }
     },
     "ios": {
@@ -35,6 +38,7 @@
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "owner": "petsi"
   }
 }
