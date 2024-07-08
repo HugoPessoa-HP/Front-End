@@ -1,4 +1,4 @@
-rootProject.name = 'plantsapp'
+rootProject.name = 'plants-app'
 
 dependencyResolutionManagement {
   versionCatalogs {
