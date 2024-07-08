@@ -27,7 +27,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "96d6f69a-407b-449f-a185-8bdc5564b04c"
+        "projectId": "96496ee1-dad9-45a8-af61-4ba1db96d10d"
       },
       "router": {
         "origin": false
@@ -39,6 +39,6 @@
     "plugins": [
       "expo-router"
     ],
-    "owner": "petsi"
+    "owner": "mobile-app-plants"
   }
 }
