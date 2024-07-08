@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet,
     Image,
     View,
@@ -10,7 +10,7 @@ import { StyleSheet,
     ScrollView
 } from 'react-native';
 
-import { ModalClass } from '../../Components/ModalClass'
+import { ModalClass } from '../../Components/ModalClass';
 import { ModalClassLocal } from '../../Components/ModalLocal';
 import { ModalClassTrail } from '../../Components/ModalTrail';
 import { api } from '../../services/API';
@@ -18,7 +18,7 @@ import { AuthContext } from '../../contexts/context';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { ModalClassPlant } from '../../Components/ModalPlant';
-import { Feather } from '@expo/vector-icons'
+import { Feather } from '@expo/vector-icons';
 //import { StackParamsFoto } from '../../routes/onStack.routes';
 //import { ViewCamera } from '../../Components/camera';
 
@@ -49,7 +49,8 @@ interface CategoryProps{
     categoria: string;
 }
 
-export interface Class1Props{
+export interface ClassProps{
+    id: string;
     opcao: string;
     nome: string;
 }
@@ -60,7 +61,7 @@ export default function Cadastro(){
     const [ latitude, setLatitude ] = useState('');
     const [ longitude, setLongitude ] = useState();
     
-    const [ category, setCategory] = useState<CategoryProps | null>(null);
+    const [ category, setCategory] = useState<CategoryProps | undefined>(undefined);
     const [ categorySelected, setCategorySelected] = useState<CategoryProps | undefined>();
     const [ saveVisible, setSaveVisible ] =useState(false);
 
@@ -69,8 +70,17 @@ export default function Cadastro(){
     const { pesquisador } = useContext(AuthContext);
     const [ classVisible, setClassVisible ] = useState(false);
 
-    const [ class1, setClass1 ] = useState<Class1Props[] | []>([]);
-    const [ class1Selected, setSelectedClass1] = useState<Class1Props | undefined>();
+    const [ class1, setClass1 ] = useState<ClassProps[] | []>([]);
+    const [ class1Selected, setSelectedClass1] = useState<ClassProps | undefined>();
+
+    const [ class2, setClass2 ] = useState<ClassProps[] | []>([]);
+    const [ class2Selected, setSelectedClass2 ] = useState<ClassProps | undefined>();
+
+    const [ class3, setClass3 ] = useState<ClassProps[] | []>([]);
+    const [ class3Selected, setSelectedClass3 ] = useState<ClassProps | undefined>();
+
+    const [ class4, setClass4 ] = useState<ClassProps[] | []>([]);
+    const [ class4Selected, setSelectedClass4 ] = useState<ClassProps | undefined>();
 
     const [ modalClass, setModalClass ] = useState(false);
 
@@ -88,11 +98,79 @@ export default function Cadastro(){
 
     useEffect(() => {
         const resp1 = [
-            { opcao: '1A', nome: 'Espécies Nativas (inclui cosmopolitas)' },
-            { opcao: '1B', nome: 'Espécies Exóticas' }
+            {id: '1', opcao: '1A', nome: 'Espécies Nativas (inclui cosmopolitas)' },
+            {id: '2', opcao: '1B', nome: 'Espécies Exóticas' }
         ]
         setClass1(resp1);
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        if(class1Selected?.id === '1'){
+        const resp1 = [
+            {id: '1', opcao: '2A', nome: 'Não forma populações puras ao ponto de inibir a regeneração de outras espécies de plantas nativas ' },
+            {id: '2', opcao: '2B', nome: 'Alienígena (não indígena, não nativa, exótica). Espécies ExóticasForma populações puras ou domina a comunidade ao ponto de inibir a regeneração de outras espécies de plantas nativas, especialmente em locais degradados ' },
+            ]
+            setClass2(resp1);
+        } else if(class1Selected?.id === '2'){
+            const resp1 = [
+            {id: '1', opcao: '3A', nome: 'Não forma populações puras ao ponto de inibir a regeneração de outras espécies de plantas nativas ' },
+            {id: '2', opcao: '3B', nome: 'Formas populações sustentáveis sem ajuda humana (plantas naturalizadas)' },
+            ]
+            setClass2(resp1);
+        }
+        
+    }, [class1Selected]);
+
+    useEffect(() => {
+        if(class2Selected?.id === '1'){
+            setCategory({categoria: 'Nativa não agressiva'});
+            setSaveVisible(true);
+        } else if (class2Selected?.id === '2'){
+            setCategory({categoria: 'Nativa dominante'});
+            setSaveVisible(true);
+        } else if(class2Selected?.id === '3'){
+            setCategory({categoria: 'Exótica ocasional'});
+            setSaveVisible(true);
+        } else if (class2Selected?.id === '4'){
+            const resp = [
+                {id: '1', opcao: '4A', nome: 'Não se estabelece em ecossistemas naturais não perturbados, espalhando-se apenas em áreas degradadas ou antropizadas (ruderal)' },
+                {id: '2', opcao: '4B', nome: 'Estabelece-se em ecossistemas naturais não perturbados' },
+                ]
+                setClass3(resp);
+        }
+    }, [class2Selected]);
+
+    useEffect(() => {
+        if(class3Selected?.id === '1'){
+            const resp = [
+                {id: '1', opcao: '5A', nome: 'Não forma populações puras, não inibindo a regeneração de espécies de plantas nativas' },
+                {id: '2', opcao: '5B', nome: ' Forma populações puras ou domina a comunidade, inibindo a regeneração de espécies de plantas nativas' },
+                ]
+                setClass4(resp);
+        } else if (class3Selected?.id === '2'){
+            const resp = [
+                {id: '1', opcao: '6A', nome: 'Não se espalha nem altera a composição ou estrutura da comunidade de plantas nativas' },
+                {id: '2', opcao: '6B', nome: 'Se espalha e altera a composição ou estrutura da comunidade de plantas nativas, suprimindo a regeneração de espécies nativas' },
+            ]
+                setClass4(resp);
+        }
+    }, [class3Selected]);
+
+    useEffect(() => {
+        if(class4Selected?.id === '1'){
+            setCategory({ categoria: 'Ruderal não dominante' })
+            setSaveVisible(true);
+        } else if ( class4Selected?.id === '2' ){
+            setCategory({categoria: 'Ruderal dominante'})
+            setSaveVisible(true);
+        } else if ( class4Selected?.id === '3' ){
+            setCategory({ categoria: 'Invasor não dominante' })
+            setSaveVisible(true);
+        } else if ( class4Selected?.id === '4' ){
+            setCategory({ categoria: 'Invasor dominante' })
+            setSaveVisible(true);
+        }
+    })
 
     useEffect(() => {
 
@@ -163,7 +241,7 @@ export default function Cadastro(){
         setSelectedPlanta(item);
     }
 
-    function Class1Options(item: Class1Props){
+    function Class1Options(item: ClassProps){
         setSelectedClass1(item)
     }
 
@@ -254,6 +332,8 @@ export default function Cadastro(){
             </TouchableOpacity>
             </View>
             }
+
+
             <Modal transparent={true}
             visible={modalTrilha}
             animationType="fade">
@@ -263,6 +343,8 @@ export default function Cadastro(){
                             selectedItem={ classTrilha }
                 />
             </Modal>
+
+
             { 
             <View style={styles.actions}>
                 <TouchableOpacity style={styles.input} onPress={ () => setPlantaVisible(true) }>
@@ -277,6 +359,7 @@ export default function Cadastro(){
                 </TouchableOpacity>
             </View>
             }
+
             <Modal transparent={true}
             visible={plantaVisible}
             animationType="fade">
@@ -286,6 +369,7 @@ export default function Cadastro(){
                             selectedItem={ classPlanta }
                 />
             </Modal>
+
 
             <Text style={styles.textOccurrence} > Ocorrências </Text>
             <Text style={styles.categoria}> {category?.categoria} </Text>
@@ -322,16 +406,33 @@ export default function Cadastro(){
 
 
             <Text style={styles.textClass}> Classificação </Text>
-            <Text> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur finibus bibendum. Vivamus vel augue vitae orci vehicula placerat sit amet ac ipsum.  </Text>
+            <Text> Nativas 
+                - não requer manejo;
 
-            <TouchableOpacity style={styles.buttonSelect} onPress={() => setModalClass(true)}>
+                Nativas dominantes
+                - controle de superpopulação no interior de áreas legalmente protegidas (baixa prioridade)
+                - controle populacional em áreas sob restauração ecológica (baixa prioridade) 
+            </Text>
+
+            <TouchableOpacity style={styles.buttonSelect} 
+            
+            onPress={() => {
+                setModalClass(true);
+                setSelectedClass1(undefined);
+                setSelectedClass2(undefined);
+                setSelectedClass3(undefined);
+                setSelectedClass4(undefined);
+                setClass2([]);
+                setClass3([]);
+                setClass4([]);
+            }}>
                 { loadingAuth ? (
                     <ActivityIndicator size={40} color="#fff"/>
                 ) : (
                     <View style={styles.actionsPlus}>
                         <Feather name='edit-2' size={22} color="#fff"/>
                         <Text style={styles.buttonText} > Classificar </Text>
-                    </View>
+                    </View> 
                 )}
             </TouchableOpacity>
 
@@ -341,12 +442,12 @@ export default function Cadastro(){
                         handleCloseModal={ () => setModalClass(false) }
                         selectedItem={ Class1Options }>
                     </ModalClass>) : (
-                        
+
                     <Text> </Text>
                 )}
 
-            {  saveVisible ? (
-            <TouchableOpacity style={styles.button} onPress={Salvar}>
+            <TouchableOpacity style={[styles.button, { opacity: category === undefined ? 0.3 : 1}]} onPress={Salvar}
+            disabled={category === undefined}>
                 { loadingAuth ? (
                     <ActivityIndicator size={40} color="#fff"/>
                 ) : (
@@ -356,20 +457,7 @@ export default function Cadastro(){
                     </View>
                 )}
             </TouchableOpacity>
-            ) : (
-                <TouchableOpacity style={styles.button2} onPress={Salvar}>
-                { loadingAuth ? (
-                    <ActivityIndicator size={40} color="#fff"/>
-                ) : (
-                    <View style={styles.actionsPlus}>
-                        <Feather name='save' size={22} color="#fff"/>
-                        <Text style={styles.buttonText}> Salvar </Text>
-                    </View>
-                )}
-            </TouchableOpacity>
-            )
-            }
-
+            
         </View>
         </ScrollView>
     )

@@ -1,25 +1,22 @@
 import React from 'react';
 
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, ScrollView} from 'react-native';
-import { ClassProps } from '../../pages/Chave_Dicotomica';
 import { Feather } from '@expo/vector-icons'
-import { Class1Props } from '../../screens/ClassificacaoScreen';
+import { ClassProps } from '../../screens/ClassificacaoScreen';
  
 interface ModalClass {
-    options: Class1Props[];
+    options: ClassProps[];
     handleCloseModal: () => void;
-    selectedItem: (item: Class1Props) => void;
+    selectedItem: (item: ClassProps) => void;
 }
 
 const { width: WIDTH , height: HEIGHT } = Dimensions.get('window');
 
 export function ModalClass({options, handleCloseModal, selectedItem }: ModalClass){
 
-    function onPressItem(item: Class1Props){    
+    function onPressItem(item: ClassProps){
         selectedItem(item);
         console.log(item);
-        
-        setTimeout(handleCloseModal, 800);
     }
 
 
@@ -44,7 +41,7 @@ export function ModalClass({options, handleCloseModal, selectedItem }: ModalClas
                     <View style={styles.inputText}>
                         <Text> {item.nome} </Text>
                     </View>
-                    <TouchableOpacity style={styles.inputSelection} onPress={ () => onPressItem(item)}>
+                    <TouchableOpacity style={styles.inputSelection} onPress={() => onPressItem(item)}>
                         <Feather name='circle' size={18} color="#000"/>
                     </TouchableOpacity>
                 </View>
