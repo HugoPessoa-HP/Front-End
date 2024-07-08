@@ -30,6 +30,8 @@
         <category android:name="android.intent.category.BROWSABLE"/>
         <data android:scheme="app-plantas"/>
         <data android:scheme="com.hugopessoa.appplantas"/>
+        <data android:scheme="com.mobileappplants.plantsapp"/>
+        <data android:scheme="plantsapp"/>
       </intent-filter>
     </activity>
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" android:exported="false"/>

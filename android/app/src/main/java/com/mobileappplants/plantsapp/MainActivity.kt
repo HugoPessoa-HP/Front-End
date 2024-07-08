@@ -1,4 +1,4 @@
-package com.hugopessoa.appplantas
+package com.mobileappplants.plantsapp
 
 import android.os.Build
 import android.os.Bundle
