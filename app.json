@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "plants-app",
-    "slug": "plants-app",
+    "name": "plantsapp",
+    "slug": "plantsapp",
     "version": "2.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,14 +20,14 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.mobile-app-plants.plants-app"
+      "package": "com.mobileappplants.plantsapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "96496ee1-dad9-45a8-af61-4ba1db96d10d"
+        "projectId": "7e197cd6-83f8-4736-87ae-6eb1698beeda"
       },
       "router": {
         "origin": false
@@ -39,6 +39,6 @@
     "plugins": [
       "expo-router"
     ],
-    "owner": "mobile-app-plants"
+    "owner": "mobileappplants"
   }
 }

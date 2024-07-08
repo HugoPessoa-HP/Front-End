@@ -17,7 +17,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 //import { StackParamsFoto } from '../../routes/onStack.routes';
 //import { ViewCamera } from '../../Components/camera';
-export interface ClassProps{
+interface ClassProps{
     id: string;
     class: string;
 }
