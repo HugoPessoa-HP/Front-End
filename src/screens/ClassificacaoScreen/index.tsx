@@ -10,6 +10,7 @@ import { StyleSheet,
     ScrollView
 } from 'react-native';
 
+import { ModalClass } from '../../Components/ModalClass'
 import { ModalClassLocal } from '../../Components/ModalLocal';
 import { ModalClassTrail } from '../../Components/ModalTrail';
 import { api } from '../../services/API';
@@ -48,15 +49,28 @@ interface CategoryProps{
     categoria: string;
 }
 
+export interface Class1Props{
+    opcao: string;
+    nome: string;
+}
+
 export default function Cadastro(){
 
     //const navigation = useNavigation<NativeStackNavigationProp<StackParamsFoto>>();
     const [ latitude, setLatitude ] = useState('');
     const [ longitude, setLongitude ] = useState();
+    
     const [ category, setCategory] = useState<CategoryProps | null>(null);
+    const [ categorySelected, setCategorySelected] = useState<CategoryProps | undefined>();
+    const [ saveVisible, setSaveVisible ] =useState(false);
+
     const [ description, setDescription ] = useState();
     const [ loadingAuth, setLoadingAuth ] = useState(false);
     const { pesquisador } = useContext(AuthContext);
+    const [ classVisible, setClassVisible ] = useState(false);
+
+    const [ class1, setClass1 ] = useState<Class1Props[] | []>([]);
+    const [ class1Selected, setSelectedClass1] = useState<Class1Props | undefined>();
 
     const [ modalClass, setModalClass ] = useState(false);
 
@@ -71,6 +85,14 @@ export default function Cadastro(){
     const [ local, setLocal ] = useState<LocalProps[] | []>([]);
     const [ localSelected, setLocalSelected ] = useState<LocalProps | undefined>();
     const [ localVisible, setLocalVisible ] = useState(false);
+
+    useEffect(() => {
+        const resp1 = [
+            { opcao: '1A', nome: 'Espécies Nativas (inclui cosmopolitas)' },
+            { opcao: '1B', nome: 'Espécies Exóticas' }
+        ]
+        setClass1(resp1);
+    }, [])
 
     useEffect(() => {
 
@@ -141,6 +163,10 @@ export default function Cadastro(){
         setSelectedPlanta(item);
     }
 
+    function Class1Options(item: Class1Props){
+        setSelectedClass1(item)
+    }
+
     /*
     function classCategory(item: ClassProps){
         setClassSelected_1(item);
@@ -149,7 +175,6 @@ export default function Cadastro(){
     async function TirarFoto(){
             //<ViewCamera/>
             console.log("Olá")
-
             // Navegar a próxima tela.
             //navigation.navigate('Foto');
     }
@@ -180,6 +205,14 @@ export default function Cadastro(){
             //Function..
         }
 
+        async function MudarCor(){
+            
+        }
+
+        async function Classificar(){
+            setClassVisible(true);
+        }
+        console.log(classVisible)
     return(
         <ScrollView>
         <View style={styles.container}>
@@ -194,10 +227,10 @@ export default function Cadastro(){
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.buttonAdd}>
-                <Text style={styles.buttonText}> + </Text>
+                <Feather name="plus" size={22} color="#fff" stroke-width={3}/>
             </TouchableOpacity>
             </View>
-            }
+            }   
             <Modal transparent={true}
             visible={localVisible}
             animationType="fade">
@@ -217,7 +250,7 @@ export default function Cadastro(){
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.buttonAdd}>
-                <Text style={styles.buttonText}> + </Text>
+                <Feather name="plus" size={22} color="#fff" stroke-width={3}/>
             </TouchableOpacity>
             </View>
             }
@@ -230,7 +263,7 @@ export default function Cadastro(){
                             selectedItem={ classTrilha }
                 />
             </Modal>
-            {
+            { 
             <View style={styles.actions}>
                 <TouchableOpacity style={styles.input} onPress={ () => setPlantaVisible(true) }>
                     <View style={ styles.inputActions }>
@@ -240,7 +273,7 @@ export default function Cadastro(){
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.buttonAdd}>
-                    <Text style={styles.buttonText}> + </Text>
+                    <Feather name="plus" size={22} color="#fff" stroke-width={3}/>
                 </TouchableOpacity>
             </View>
             }
@@ -274,55 +307,68 @@ export default function Cadastro(){
                 onChangeText={setLatitude}
                 />
             </View>
-            <TouchableOpacity style={[styles.buttonSelect, {}]} onPress={Salvar}>
+
+
+            <TouchableOpacity style={styles.buttonSelect} onPress={Salvar}>
                 { loadingAuth ? (
                     <ActivityIndicator size={40} color="#fff"/>
                 ) : (
                     <View style={styles.actionsPlus}>
-                        <Text style={styles.buttonText}> + </Text>
+                        <Feather name="plus" size={22} color="#fff" stroke-width={3}/>
                         <Text style={styles.buttonText} > Adicionar </Text>
                     </View>
                 )}
             </TouchableOpacity>
 
+
             <Text style={styles.textClass}> Classificação </Text>
+            <Text> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur finibus bibendum. Vivamus vel augue vitae orci vehicula placerat sit amet ac ipsum.  </Text>
 
-            <View style={styles.classUP}>
-                <View style={styles.class}>
-                    <View style={styles.inputNumber}>
-                        <Text style={{color: '#fff'}}> 1A </Text>
+            <TouchableOpacity style={styles.buttonSelect} onPress={() => setModalClass(true)}>
+                { loadingAuth ? (
+                    <ActivityIndicator size={40} color="#fff"/>
+                ) : (
+                    <View style={styles.actionsPlus}>
+                        <Feather name='edit-2' size={22} color="#fff"/>
+                        <Text style={styles.buttonText} > Classificar </Text>
                     </View>
-                    <View style={styles.inputText}>
-                    <Text> Espécies nativas (inclui cosmopolitas) </Text>
-                    </View>
-                    <TouchableOpacity style={styles.inputSelection} onPress={ () => setModalClass(true) }>
-                        <Feather name='chevrons-right' size={28} color="#fff"/>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.class}>
-                    <View style={styles.inputNumber}>
-                        <Text style={{color: '#fff'}}> 1B </Text>
-                    </View>
-                    <View style={styles.inputText}>
-                        <Text> Espécies nativas (inclui cosmopolitas) </Text>
-                    </View>
-                    <TouchableOpacity style={styles.inputSelection}>
-                        <Feather name='chevrons-right' size={28} color="#fff"/>
-                    </TouchableOpacity>
-                </View>
-            </View>
+                )}
+            </TouchableOpacity>
 
+                { modalClass ? (
+                    <ModalClass
+                        options={class1}
+                        handleCloseModal={ () => setModalClass(false) }
+                        selectedItem={ Class1Options }>
+                    </ModalClass>) : (
+                        
+                    <Text> </Text>
+                )}
 
+            {  saveVisible ? (
             <TouchableOpacity style={styles.button} onPress={Salvar}>
                 { loadingAuth ? (
                     <ActivityIndicator size={40} color="#fff"/>
                 ) : (
-                    <Text style={styles.buttonText}> Salvar </Text>
+                    <View style={styles.actionsPlus}>
+                        <Feather name='save' size={22} color="#fff"/>
+                        <Text style={styles.buttonText}> Salvar </Text>
+                    </View>
                 )}
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={TirarFoto}>
-                <Text style={styles.buttonText} > Tirar Foto </Text>
+            ) : (
+                <TouchableOpacity style={styles.button2} onPress={Salvar}>
+                { loadingAuth ? (
+                    <ActivityIndicator size={40} color="#fff"/>
+                ) : (
+                    <View style={styles.actionsPlus}>
+                        <Feather name='save' size={22} color="#fff"/>
+                        <Text style={styles.buttonText}> Salvar </Text>
+                    </View>
+                )}
             </TouchableOpacity>
+            )
+            }
 
         </View>
         </ScrollView>
@@ -351,52 +397,35 @@ textNormal: {
 textOccurrence:{
     fontSize: 24
 },
-classUP:{
-    justifyContent: 'space-evenly',
-    marginTop: 14,
-    marginBottom: 24
-},
 textClass:{
-    fontSize: 24,
-    color: '#fa5f5f',
+    fontSize: 28,
+    color: '#0f0f0f',
     fontWeight: 'bold',
-},
-inputText:{
-    width: '80%',
-    height: 100,
-    backgroundColor: '#f0f0f0',
-    borderBottomColor: '#050505',
-    borderRadius: 4,
-    justifyContent: 'center',
-    alignItems: 'center'
-},
-inputSelection:{
-    width: '7%',
-    height: 100,
-    backgroundColor: '#429e59',
-    borderRadius: 4,
-    justifyContent: 'center',
-    alignItems: 'flex-start'
 },
 logo:{
     marginBottom: 18
 },
 input:{
+    borderColor: "#0f0f0f",
+    borderWidth: 1,
+    borderTopColor: '#000',
     width: '80%',
     height: 44,
     backgroundColor: '#f0f0f0',
     marginBottom: 12,
-    borderRadius: 4,
+    borderRadius: 16,
     color: '#050505',
     justifyContent: 'space-between',
     paddingHorizontal: 8,
 },
 inputContainer:{
-    width: '45%',
+    borderColor: "#0f0f0f",
+    borderWidth: 1,
+    width: '48%',
     height: 44,
     backgroundColor: '#f0f0f0',
     marginBottom: 8,
-    borderRadius: 4,
+    borderRadius: 16,
     color: '#050505',
     justifyContent: 'center',
     paddingHorizontal: 8,
@@ -408,19 +437,20 @@ inputActions:{
     justifyContent: 'space-between',
     alignItems: 'center'
 },
-inputNumber:{
-    width: '13%',
-    height: 100,
-    backgroundColor: '#5f5f5f',
-    borderRadius: 4,
-    justifyContent: 'center',
-    alignItems: 'center'
-},
 button:{
     width: '100%',
     height: 40,
     backgroundColor: '#429e59',
-    borderRadius: 4,
+    borderRadius: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 10
+},
+button2:{
+    width: '100%',
+    height: 40,
+    backgroundColor: '#8f8f8f',
+    borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 10
@@ -434,10 +464,10 @@ categoria:{
     fontStyle: 'italic',
 },
 buttonAdd:{
-    width: '15%',
+    width: '16%',
     backgroundColor: '#5f5f5f',
-    borderRadius: 4,
-    height: 40,
+    borderRadius: 16,
+    height: 44,
     justifyContent: 'center',
     alignItems: 'center'
 },
@@ -450,7 +480,7 @@ buttonSelect:{
     width: '100%',
     height: 40,
     backgroundColor: '#5f5f5f',
-    borderRadius: 4,
+    borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
     marginVertical: 10
@@ -458,12 +488,7 @@ buttonSelect:{
 actionsPlus:{
     flexDirection: 'row',
     width: '100%',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
 },
-class:{
-    flexDirection: 'row',
-    width: '100%',
-    justifyContent: 'space-between',
-    alignContent: 'center'
-}
 })

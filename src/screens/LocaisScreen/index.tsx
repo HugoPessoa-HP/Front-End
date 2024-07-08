@@ -55,7 +55,7 @@ const LocaisScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View styles={styles.searchContainer}>
+      <View>
         <TouchableOpacity onPress={toggleSearch}>
           <MaterialIcons name="search" size={24} color="black" style={styles.icon} />
           </TouchableOpacity>

@@ -115,7 +115,7 @@ export default function Cadastro(){
         loadInfo();
     }, [trilhaSelected]);
 
-    
+
 
     async function uploadImage(){
 
@@ -295,10 +295,10 @@ export default function Cadastro(){
                         <Text style={{color: '#fff'}}> 1A </Text>
                     </View>
                     <View style={styles.inputText}>
-                    <Text> Espécies nativas (inclui cosmopolitas) </Text>
+                        <Text> Espécies nativas (inclui cosmopolitas) </Text>
                     </View>
                     <TouchableOpacity style={styles.inputSelection} onPress={ () => setModalClass(true) }>
-                        <Feather name='chevrons-right' size={28} color="#fff"/>
+                        <Feather name='circle' size={28} color="#fff"/>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.class}>
@@ -306,10 +306,10 @@ export default function Cadastro(){
                         <Text style={{color: '#fff'}}> 1B </Text>
                     </View>
                     <View style={styles.inputText}>
-                        <Text> Espécies nativas (inclui cosmopolitas) </Text>
+                        <Text> Espécies Exóticas (inclui cosmopolitas) </Text>
                     </View>
                     <TouchableOpacity style={styles.inputSelection}>
-                        <Feather name='chevrons-right' size={28} color="#fff"/>
+                        <Feather name='circle' size={28} color="#fff"/>
                     </TouchableOpacity>
                 </View>
             </View>
