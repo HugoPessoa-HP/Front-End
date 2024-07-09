@@ -1,4 +1,4 @@
-package com.plantsmobileapp.app_plants
+package com.plantsmobiles.app_plants
 
 import android.app.Application
 import android.content.res.Configuration

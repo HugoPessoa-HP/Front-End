@@ -83,9 +83,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.plantsmobile.app_plants'
+    namespace 'com.plantsmobiles.app_plants'
     defaultConfig {
-        applicationId 'com.plantsmobile.app_plants'
+        applicationId 'com.plantsmobiles.app_plants'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
