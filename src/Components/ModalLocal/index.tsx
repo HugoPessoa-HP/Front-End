@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, ScrollView} from 'react-native';
-import { ClassProps } from '../../pages/Chave_Dicotomica';
+//import { ClassProps } from '../../pages/Chave_Dicotomica';
 import { LocalProps, PlantaProps, TrilhaProps } from '../../pages/Classificacao';
  
 interface ModalLocalCategory {

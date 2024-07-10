@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, Button } from 'react-native';
 
 const PlantaScreen = ({ route }) => {
   const { planta } = route.params;
+  const [ modalVisible, setModalVisible ] = useState(false);
 
   if (!planta) {
     return null;
+  }
+
+  function modal(){
+    setModalVisible(true);
   }
 
   return (
@@ -37,6 +42,7 @@ const PlantaScreen = ({ route }) => {
           title="Refazer Classificação"
           color="#8A8A8A"
           accessibilityLabel="Refazer Classificação"
+          onPress={ modal }
         />
       </View>
     </View>
